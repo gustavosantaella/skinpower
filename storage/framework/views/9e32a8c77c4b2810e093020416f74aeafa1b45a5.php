@@ -1,0 +1,1 @@
+<?php echo e($id); ?><?php /**PATH /var/www/html/theskinpower/resources/views/mails/mailtest.blade.php ENDPATH**/ ?>
