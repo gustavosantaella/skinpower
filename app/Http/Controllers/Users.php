@@ -66,7 +66,9 @@ class Users extends Controller
 				include_once("../resources/views/mails/confirmMail.blade.php");
 
 				if (SendMail::mail($array,$var,"Verfy email",$id)) {
-					return redirect()->back()->with('message','Please, check your email and confirm your email, u have 5 minutes');
+					/*return redirect()->back()->with('message','Please, check your email and confirm your email, u have 5 minutes');*/
+					error_reporting(1);
+					error_reporting(E_ALL);
 				}
 				else
 				{
