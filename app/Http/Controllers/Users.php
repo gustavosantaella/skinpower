@@ -9,6 +9,9 @@ use App\Models as Usuarios;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Str;
 use PHPMailer\PHPMailer;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Mails;
+
 use DateTime;
 use Exception;
 
@@ -39,7 +42,7 @@ class Users extends Controller
 		$pass =  Hash::make($request->pass);
 		$tokken  = Str::random(100);
 		$date = new DateTime();
-		$date->modify('+5 minutes');
+		$date->modify('+60 minutes');
 		$array =
 		[
 			'name'=>strtoupper($request->name),
@@ -63,12 +66,12 @@ class Users extends Controller
 
 				$id = DB::getPdo()->lastInsertId();
 				
-				include_once("../resources/views/mails/confirmMail.blade.php");
+			$correo = new Mails('Verify your email',$id,$array);
 
-				if (SendMail::mail($array,$var,"Verfy email",$id)) {
-					/*return redirect()->back()->with('message','Please, check your email and confirm your email, u have 5 minutes');*/
-					error_reporting(1);
-					error_reporting(E_ALL);
+
+				if (Mail::to($array['email'])->send($correo)===null) 
+				{
+					return redirect()->back()->with('message','Please, check your email and confirm your email, u have 5 minutes');
 				}
 				else
 				{
@@ -115,10 +118,11 @@ class Users extends Controller
 					return redirect('User/SignIn')->with('message','Error');
 				}
 			}
+
+
 			else
 			{
-				
-
+	
 				DB::delete("DELETE FROM users WHERE id=:id",[':id'=>$id]);
 				return redirect('User/SignIn')->with('message','Your tokken expired, your username was deleted, please register again.');
 			}
