@@ -14,7 +14,7 @@
 
 	<center>	
 		<div >
-			<!-- <img src="{{asset(img/TheSkinPower1.jpg)}}" alt="Avatar" width="150" height="150" style="border-radius: 5px 5px 0 0;"> -->
+			
 			<div class="container">
 				<p>Confirm your email by clicking</p> <a href="<?php echo Request::root() ?>/Verify/email?id=<?= Crypt::encryptString($id)?>&state=<?= Crypt::encryptString(TRUE)?>&tokken=<?= Crypt::encryptString($datos['tokken'])?>" title="">here.</a><p>Do not share this link. <br>
 
