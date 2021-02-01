@@ -69,7 +69,7 @@ class Users extends Controller
 			$correo = new Mails('Verify your email',$id,$array);
 
 
-				if (Mail::to($array['email'])->send($correo)===null) 
+				if (Mail::to($array['email'])->send($correo)) 
 				{
 					return redirect()->back()->with('message','Please, check your email and confirm your email, u have 5 minutes');
 				}
