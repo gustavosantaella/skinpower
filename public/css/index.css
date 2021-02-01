@@ -1,0 +1,301 @@
+@charset "UTF-8";
+@media only screen and (min-width: 1000px){
+
+	body{
+		overflow-y:hidden;
+		overflow-x:hidden;
+		background-image: url(../IMG/fondo2.jpg);
+		background-attachment: fixed;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+	}
+	.loader {
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		background: url('../IMG/cargando.gif') 50% 50% no-repeat rgb(249,249,249);
+		opacity: .8;
+	}
+	
+	.cintillo{
+		position: absolute;
+		top: -20px;
+		width: 101%;
+		height: 100px;
+		left: -1%;
+		
+	}
+
+	.contenedor{
+		background: rgba(100,70,100,0.1);
+		border-radius: 10%;
+		width: 38%;
+		height: 390px;
+		position: relative;
+		left: 30%;
+		top: 130px;
+		-webkit-box-shadow:1px -5px 100px  20px white;
+		transition: all 1000ms;}
+
+
+	}
+
+	.logo-img{
+		position: absolute;
+		left: 37%;
+		top: 30px;
+	}
+
+	.user-img{
+		position: absolute;
+		left: 20%;
+		width: 20%;
+		top: 120px;
+
+	}
+
+	.pass-img{
+		position: absolute;
+		left: 23%;
+		width: 14%;
+		top: 200px;
+	}
+
+	.user{
+		position: absolute;
+		left: 38%;
+		height: 20px;
+		top: 146px;
+		outline: none;
+		border: 0px;
+		background: transparent;
+		color: #fff;
+		border-bottom: 1px solid white;
+		font-family: Arial;
+	} 
+	.pass{
+
+		position: absolute;
+		left: 38%;
+		height: 20px;
+		top: 230px;
+		outline: none;
+		border: 0px;
+		background: transparent;
+		color: #fff;
+		border-bottom: 1px solid white;
+		font-family: Arial;
+	}
+
+	::-webkit-input-placeholder { 
+		color: black;
+		font-weight: bold;
+
+	} 
+
+	.loader {
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		background: url('../IMG/cargando.gif') 50% 50% no-repeat white;
+		/*opacity: 0.8;*/
+		animation-timing-function: 50s;
+	}
+
+
+
+
+
+	.captcha{
+
+		border: 0px;
+		outline: none;
+		background: transparent;
+		color: white;
+		font-weight: bold;
+		transform: rotate(20deg);
+		font-size: 20px;
+
+	}
+
+	.send{
+		position: absolute;
+		width: 27%;
+		height: 50px;
+		border: 0px;
+		outline: none;
+		border-radius: 50px;
+		background-image: linear-gradient(90deg, rgba(220,20,60,0.90), rgba(100,149,237,0.90));
+		color: #fff;
+		font-weight: bold;
+		font-family: Arial;
+		background-clip: text;
+		top: 300px;
+		left: 36%;
+		transition: all 1000ms;
+	}
+
+
+	.send:hover{
+		cursor: pointer;
+		background: -webkit-gradient(radial, 100 75, 100, 100 75, 0, from(rgba(100, 100, 100, .7)), to(rgba(0, 0, 0, .4)));
+		transition: all 1000ms;
+	}
+
+
+	/*-------------------VISTA EN MOVIL---------------------------*/
+
+	@media only screen and (max-width: 900px ) {
+
+		body{
+			overflow-y:hidden;
+			overflow-x:hidden;
+			background-image: url(../IMG/fondo2.jpg);
+			background-attachment: fixed;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
+		}
+
+		
+
+
+
+
+
+
+		.cintillo{
+			position: absolute;
+			top: -20px;
+			width: 101%;
+			height: 100px;
+			left: -1%;
+
+		}
+
+		.contenedor{
+			background: rgba(100,70,100,0.1);
+			border-radius: 10%;
+
+			height: 390px;
+			position: relative;
+			left: -0.3%;
+			top: 130px;
+			-webkit-box-shadow:1px -5px 100px  20px white;
+			transition: all 1000ms;}
+
+
+
+			.logo-img{
+				position: absolute;
+				left: 37%;
+				top: 30px;
+			}
+
+			.user-img{
+				position: absolute;
+				left: 20%;
+				width: 20%;
+				top: 120px;
+
+			}
+
+			.pass-img{
+				position: absolute;
+				left: 23%;
+				width: 14%;
+				top: 200px;
+			}
+
+			.user{
+				position: absolute;
+				left: 38%;
+				height: 20px;
+				top: 146px;
+				outline: none;
+				border: 0px;
+				background: transparent;
+				color: #fff;
+				border-bottom: 1px solid white;
+				font-family: Arial;
+			} 
+			.pass{
+
+				position: absolute;
+				left: 38%;
+				height: 20px;
+				top: 230px;
+				outline: none;
+				border: 0px;
+				background: transparent;
+				color: #fff;
+				border-bottom: 1px solid white;
+				font-family: Arial;
+			}
+
+			::-webkit-input-placeholder { 
+				color: black;
+				font-weight: bold;
+
+			} 
+
+			.loader {
+				position: fixed;
+				left: 0px;
+				top: 0px;
+				width: 100%;
+				height: 100%;
+				z-index: 9999;
+				background: url('../img/cargando.gif') 50% 50% no-repeat white;
+				/*opacity: 0.8;*/
+				animation-timing-function: 50s;
+			}
+
+
+
+
+
+			.captcha{
+
+				border: 0px;
+				outline: none;
+				background: transparent;
+				color: white;
+				font-weight: bold;
+				transform: rotate(20deg);
+				font-size: 20px;
+
+			}
+
+			.send{
+				position: absolute;
+				width: 27%;
+				height: 50px;
+				border: 0px;
+				outline: none;
+				border-radius: 50px;
+				background-image: linear-gradient(90deg, rgba(220,20,60,0.90), rgba(100,149,237,0.90));
+				color: #fff;
+				font-weight: bold;
+				font-family: Arial;
+				background-clip: text;
+				top: 300px;
+				left: 36%;
+				transition: all 1000ms;
+			}
+
+
+			.send:hover{
+				cursor: pointer;
+				background: -webkit-gradient(radial, 100 75, 100, 100 75, 0, from(rgba(100, 100, 100, .7)), to(rgba(0, 0, 0, .4)));
+				transition: all 1000ms;
+
+			}
+		}
