@@ -42,7 +42,7 @@ class Users extends Controller
 		$pass =  Hash::make($request->pass);
 		$tokken  = Str::random(100);
 		$date = new DateTime();
-		$date->modify('+60 minutes');
+		$date->modify('+1 hour');
 		$array =
 		[
 			'name'=>strtoupper($request->name),
@@ -54,7 +54,7 @@ class Users extends Controller
 			'pass'=>$pass,
 			'tokken'=>$tokken,
 			'verified'=>false,
-			'email_verified_at'=>$date->format('d/m/Y H:i:s'),
+			'email_verified_at'=>$date->format('Y-m-d H:i:s'),
 		];
 
 
@@ -69,7 +69,7 @@ class Users extends Controller
 			$correo = new Mails('Verify your email',$id,$array);
 
 
-				if (Mail::to($array['email'])->send($correo)===nulll) 
+				if (Mail::to($array['email'])->send($correo)===null) 
 				{
 					return redirect()->back()->with('message','Please, check your email and confirm your email, u have 5 minutes');
 				}
@@ -92,6 +92,7 @@ class Users extends Controller
 		$this->validate($request,[
 			'id'=>'required|Min:20',
 			'state'=>'required|Min:20',
+			'tokken'=>'required|Min:20',
 		]);
 
 		
@@ -100,7 +101,7 @@ class Users extends Controller
 			$datos = [
 				'verified'=>Crypt::decryptString($request->state),
 				'tokken'=>Crypt::decryptString($request->tokken),
-				'email_verified_at'=>date('d-m-Y H:i:s ',time()),
+				
 			];
 			$id = Crypt::decryptString($request->id);
 			$tokken = Crypt::decryptString($request->tokken);
@@ -112,6 +113,7 @@ class Users extends Controller
 					$removeTokken = DB::update('UPDATE users SET tokken=null WHERE id=:id',[':id'=>$id]);
 
 					return redirect('User/SignIn')->with('message','Email verified, SignIn.');
+			
 				}
 				else
 				{
@@ -122,7 +124,7 @@ class Users extends Controller
 
 			else
 			{
-	
+				
 				DB::delete("DELETE FROM users WHERE id=:id",[':id'=>$id]);
 				return redirect('User/SignIn')->with('message','Your tokken expired, your username was deleted, please register again.');
 			}

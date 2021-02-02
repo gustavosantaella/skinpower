@@ -26,10 +26,9 @@ class Users extends Model
 	}
 	public static function updateVerified(array $datos,$id)
 	{
-		return DB::update('UPDATE  users SET verified=:verified, email_verified_at=:fecha WHERE id=:id',[
+		return DB::update('UPDATE  users SET verified=:verified WHERE id=:id',[
 			
 			'verified'=>true,
-			':fecha'=>$datos['email_verified_at'],
 			':id'=>$id
 		]);
 
