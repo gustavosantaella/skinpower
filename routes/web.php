@@ -37,6 +37,7 @@ Route::get('Verify/email',"Users@updateVerified");
 Route::get('User/LogOut','Users@LogOut');
 Route::get('User/Profile','Users@Profile');
 Route::post('User/Profile','Users@update');
+Route::get('User/resendTokken','Users@resendTokken');
 
 /*Cart*/
 Route::get('Cart/Show',function(){

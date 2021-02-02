@@ -57,6 +57,11 @@
 
                                   </ul>
                               </div>
+                              <?php elseif(session('resend')): ?>
+                              <div class="alert-info rounded-bottom rounded-left rounded-right rounded-top p-3 font-weight-bold">
+                                     Tokken expired, <a href="<?php echo e(url('User/resendTokken')); ?>?id=<?php echo e(session('resend')); ?>" title="resend email">send again</a>
+                                  </ul>
+                              </div>
                               <?php endif; ?>
                               <form class="user" method="post" id="form" action="<?php echo e(url('User/SignIn')); ?>">
                                 <?php echo csrf_field(); ?>

@@ -56,6 +56,11 @@
                                       {{session('message')}}
                                   </ul>
                               </div>
+                              @elseif(session('resend'))
+                              <div class="alert-info rounded-bottom rounded-left rounded-right rounded-top p-3 font-weight-bold">
+                                     Tokken expired, <a href="{{ url('User/resendTokken') }}?id={{ session('resend')}}" title="resend email">send again</a>
+                                  </ul>
+                              </div>
                               @endif
                               <form class="user" method="post" id="form" action="{{ url('User/SignIn') }}">
                                 @csrf

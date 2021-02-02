@@ -66,12 +66,12 @@ class Users extends Controller
 
 				$id = DB::getPdo()->lastInsertId();
 				
-			$correo = new Mails('Verify your email',$id,$array);
+				$correo = new Mails('Verify your email',$id,$array);
 
 
 				if (Mail::to($array['email'])->send($correo)===null) 
 				{
-					return redirect()->back()->with('message','Please, check your email and confirm your email, u have 5 minutes');
+					return redirect()->back()->with('message','Please, check your email and confirm your email, u have 1 hour');
 				}
 				else
 				{
@@ -113,7 +113,7 @@ class Users extends Controller
 					$removeTokken = DB::update('UPDATE users SET tokken=null WHERE id=:id',[':id'=>$id]);
 
 					return redirect('User/SignIn')->with('message','Email verified, SignIn.');
-			
+
 				}
 				else
 				{
@@ -125,11 +125,12 @@ class Users extends Controller
 			else
 			{
 				
-				DB::delete("DELETE FROM users WHERE id=:id",[':id'=>$id]);
-				return redirect('User/SignIn')->with('message','Your tokken expired, your username was deleted, please register again.');
+				DB::update('UPDATE users SET tokken=null, email_verified_at=null WHERE id=:id',[':id'=>$id]);
+				return redirect('User/SignIn')->with('resend',Crypt::encryptString($id));
 			}
 			
-		}else
+		}
+		else
 		{
 
 			return redirect('User/SignIn')->with('message','Error');
@@ -193,6 +194,26 @@ class Users extends Controller
 			return redirect()->back()->withInput()->with('message','Invalid user');
 		}
 
+	}
+
+	public function resendTokken(Request $request)
+	{
+		$this->validate($request,['id'=>'required|Min:20']);
+		$id = Crypt::decryptString($request->id);
+		$user = DB::table('users')->select('*')->find($id);
+		$date = new DateTime();
+		$date->modify('+1 hour');
+		$array = ['email_verified_at'=>$date->format('Y-m-d H:i:s'),'tokken'=>Str::random(100)];
+		DB::table('users')->update($array);
+		$correo = new Mails('Verify your email',$id,$array);
+		if (Mail::to($user->email)->send($correo)===null) 
+		{
+			return redirect('User/SignIn')->with('message','Please, check your email and confirm your email, u have 1 hour');
+		}
+		else
+		{
+			return redirect()->back()->with('message','Error');
+		}
 	}
 
 
