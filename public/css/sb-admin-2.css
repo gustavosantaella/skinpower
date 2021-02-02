@@ -10824,19 +10824,19 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("../IMG/TheSkinPower1.jpg");
+  background: url("../img/TheSkinPower1.jpg");
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("../IMG/TheSkinPower2.jpg");
+  background: url("../img/TheSkinPower2.jpg");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("../IMG/TheSkinPower3.jpg");
+  background: url("../img/TheSkinPower3.jpg");
   background-position: center;
   background-size: cover;
 }

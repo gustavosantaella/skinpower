@@ -173,9 +173,13 @@ class Users extends Controller
 					{
 						return redirect('/');
 					}
-					else
+					elseif($var->rol==='ADMIN')
 					{
 						return redirect('Admin/Home');
+					}
+					else
+					{
+						return "error";
 					}
 				}
 				else

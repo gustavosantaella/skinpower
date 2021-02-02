@@ -104,7 +104,7 @@
 
 <!-- Bootstrap core JavaScript-->
 <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('js/js-bootstrap/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('js/js-bootstrap/bootstrap.bundle.min.js') }}"></script>
 
 <!-- Core plugin JavaScript-->
 <script src="{{ asset('js/jquery/jquery-easing/jquery.easing.min.js') }}"></script>
