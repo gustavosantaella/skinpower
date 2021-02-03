@@ -11,9 +11,26 @@ class Orders extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function addOrder(Request $request)
     {
-        //
+        echo "<pre>";
+print_r($_POST);
+        echo "</pre>";
+       $this->validate($request,[
+        'product'=>'required|Array',
+        'price'=>'required|Array',
+        'stock'=>'required|Array',
+        'nameProduct'=>'required|Array',
+        'brand'=>'required|Array',
+        'total'=>'required',
+        'name'=>'required',
+        'email'=>'required',
+        'phone'=>'required',
+        'payMethod'=>'required',
+        'idUser'=>'required',
+        
+
+   ]);
     }
 
     /**

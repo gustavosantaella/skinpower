@@ -44,3 +44,7 @@ Route::get('Cart/Show',function(){
 		return view('Cart/Cart');
 });
 Route::post('Cart/remove','Cart@remove');
+
+/*Orders*/
+
+Route::post('Orders/addOrder','Orders@addOrder');

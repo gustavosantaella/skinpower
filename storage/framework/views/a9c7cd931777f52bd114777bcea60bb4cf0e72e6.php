@@ -96,11 +96,12 @@ $prdocut= [];
 
 		<?php for($i=0; $i<count($product['product']); $i++): ?>
 		<div class="d-flex" hidden="">
-			<input type="hidden" name="product[]" value="<?php echo e($product['product'][$i]); ?>">
-			<input type="hidden" name="price[]" value="<?php echo e($product['price'][$i]); ?>">
-			<input type="hidden" name="stock[]" value="<?php echo e($product['stock'][$i]); ?>">
-			<input type="hidden" name="nameProduct[]" value="<?php echo e($product['nameProduct'][$i]); ?>">
-			<input type="hidden" name="brand[]" value="<?php echo e($product['brand'][$i]); ?>">
+			<input type="hidden" name="product[]" value="<?php echo e(Crypt::encryptString( $product['product'][$i])); ?>">
+			<input type="hidden" name="price[]" value="<?php echo e(Crypt::encryptString($product['price'][$i])); ?>">
+			<input type="hidden" name="stock[]" value="<?php echo e(Crypt::encryptString($product['stock'][$i])); ?>">
+			<input type="hidden" name="nameProduct[]" value="<?php echo e(Crypt::encryptString($product['nameProduct'][$i])); ?>">
+			<input type="hidden" name="brand[]" value="<?php echo e(Crypt::encryptString($product['brand'][$i])); ?>">
+			<input type="hidden" name="idUser" value="<?php echo e(Crypt::encryptString($_SESSION['iduser'])); ?>">
 
 		</div>
 
@@ -109,25 +110,37 @@ $prdocut= [];
 		<fieldset class="form-group">
 
 			<label for="name">Name user</label>
-			<input type="text" class="form-control" id="name" required="" name="name" readonly="" value="<?php echo e($_SESSION['name']); ?>">
+			<input type="text" class="form-control" id="name" required=""  readonly="" value="<?php echo e($_SESSION['name']); ?>">
+
+			<input type="hidden" class="form-control" id="name" required="" name="name" readonly="" value="<?php echo e(Crypt::encryptString($_SESSION['name'])); ?>">
 		</fieldset>
 
 		<fieldset class="form-group">
 			<label for="email">Email</label>
-			<input type="text" class="form-control" id="email" required="" name="email" readonly="" value="<?php echo e($_SESSION['email']); ?>">
+			<input type="hidden" class="form-control" id="email" required="" name="email" readonly="" value="<?php echo e(Crypt::encryptString($_SESSION['email'])); ?>">
+
+			<input type="text" class="form-control" id="email" required=""  readonly="" value="<?php echo e($_SESSION['email']); ?>">
 		</fieldset>
 
 		<fieldset class="form-group">
 			<label for="phone">Phone number</label>
-			<input type="tel" class="form-control" id="phone" name="phone" required="" readonly="" value="<?php echo e($_SESSION['phone']); ?>">
+			<input type="hidden" class="form-control" id="phone" name="phone" required="" readonly="" value="<?php echo e(Crypt::encryptString($_SESSION['phone'])); ?>">
+
+			<input type="tel" class="form-control" id="phone"  required="" readonly="" value="<?php echo e($_SESSION['phone']); ?>">
 		</fieldset>
 
 		<fieldset class="form-group">
 			<h3>Pay method</h3> 
-			<input type="radio" name="payMethod" required="" value="ZELLE" placeholder=""> ZELLE<br>
-			<input type="radio" name="payMethod" required="" value="USD" placeholder=""> USD<br>
-			<input type="radio" name="payMethod" required="" value="BS" placeholder=""> BS<br>
-			<input type="radio" name="payMethod" required="" value="OTHER" placeholder=""> OTHER<br>
+			<select name="payMethod" required="" class="form-control">
+
+				<option selected="" disabled="" value="">---SELECT PAY METHOD---</option>
+				<option value="<?php echo e(Crypt::encryptString('ZELLE')); ?>">ZELLE</option>
+				<option value="<?php echo e(Crypt::encryptString('USD')); ?>">USD</option>
+				<option value="<?php echo e(Crypt::encryptString('OTHER')); ?>">OTHER</option>
+			
+			</select>
+			<small>Please select a pay method</small>
+			 
 		</fieldset>
 		<button type="submit" class="btn btn-primary font-weight-bold">Accept</button>
 	</form>

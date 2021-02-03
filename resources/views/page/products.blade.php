@@ -65,4 +65,14 @@
 	</div>
 	
 </div>
+
+<style>
+	.img{
+		transition: all 1000ms;
+	}
+
+	.img:hover{
+		transform: scale(2.5);
+	}
+</style>
 @stop

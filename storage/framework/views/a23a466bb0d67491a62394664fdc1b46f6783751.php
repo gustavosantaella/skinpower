@@ -65,5 +65,15 @@
 	</div>
 	
 </div>
+
+<style>
+	.img{
+		transition: all 1000ms;
+	}
+
+	.img:hover{
+		transform: scale(2.5);
+	}
+</style>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.HeaderPage', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/theskinpower/resources/views/page/products.blade.php ENDPATH**/ ?>
