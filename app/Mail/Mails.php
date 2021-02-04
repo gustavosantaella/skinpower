@@ -20,11 +20,13 @@ class Mails extends Mailable
     public $subject;
     public $id;
     public $datos;
-    public function __construct(string $subject,$id=null,array $datos=null)
+    public $viewMail;
+    public function __construct($subject,$id=null,$datos=null,$viewMail)
     {
         $this->subject = $subject;
         $this->id = $id;
         $this->datos = $datos;
+        $this->viewMail = $viewMail;
     }
 
     /**
@@ -34,6 +36,9 @@ class Mails extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.confirmMail')->with('id',$this->id)->with('datos',$this->datos);
+        //return $this->view('mails.confirmMail')->with('id',$this->id)->with('datos',$this->datos);
+        return $this->view("mails.$this->viewMail");
     }
+
+  
 }

@@ -9,11 +9,11 @@ class Users extends Model
 {
 	use HasFactory;
 	protected $table ='users';
-	public static function Register(array $datos):bool
+	public static function Register( $datos):bool
 	{
 		try 
 		{
-
+			$datos = (array)$datos;
 			return DB::table('users')->insert($datos);
 
 		} 
@@ -45,9 +45,9 @@ class Users extends Model
 		]);
 	}
 
-	public static function Exists(array $datos):int
+	public static function Exists( $datos):int
 	{
-		return DB::table('users')->select('*')->where('email','=',$datos['email'])->count();
+		return DB::table('users')->select('*')->where('email','=',$datos)->count();
 	}
 
 	public static function Exist(string $datos)

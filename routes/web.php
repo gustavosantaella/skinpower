@@ -38,10 +38,17 @@ Route::get('User/LogOut','Users@LogOut');
 Route::get('User/Profile','Users@Profile');
 Route::post('User/Profile','Users@update');
 Route::get('User/resendTokken','Users@resendTokken');
+Route::get('User/ForgotPassword',function(){
+	return view('Users/forgotPassword');
+});
+Route::post('User/ForgotPassword','Users@resetPassword');
+Route::get('User/resetPass','Users@resetPass');
+Route::post('User/resetPass','Users@resetclave');
+
 
 /*Cart*/
 Route::get('Cart/Show',function(){
-		return view('Cart/Cart');
+	return view('Cart/Cart');
 });
 Route::post('Cart/remove','Cart@remove');
 

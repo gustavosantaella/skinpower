@@ -71,11 +71,7 @@
                                 <input type="email"required="" minlength="5" class="form-control val" id="mail" name="email" placeholder="Email...">
                                 <small></small>
                             </fieldset>
-                            <fieldset class="form-group">
-                                <label for="phone" id="mailText">Phone number</label>
-                                <input type="tel"required="" class="form-control val"  minlength="13"value="+58" maxlength="13" id="phone" name="phone" placeholder="Phone number...">
-                                <small>Your phone number, preferably with whatsapp </small>
-                            </fieldset>
+                         
                             <fieldset class="form-group">
                                 <label for="pass" id="passText">Password</label>
                                 <input type="password" required=""class="form-control  val" minlength="6" name="pass" id="pass" placeholder="Password...">

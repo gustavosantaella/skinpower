@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 use PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Mails;
-
 use DateTime;
 use Exception;
 
@@ -34,7 +33,7 @@ class Users extends Controller
 			'name'=>'required|Min:5',
 			'lastname'=>'required|Min:5',
 			'email'=>'required|Min:5|email',
-			'phone'=>'required|Min:13|Max:13',
+			/*'phone'=>'required|Min:13|Max:13',*/
 			'pass'=>'required|Min:6',
 
 		]);
@@ -48,7 +47,6 @@ class Users extends Controller
 			'name'=>strtoupper($request->name),
 			'lastname'=>strtoupper($request->lastname),
 			'email'=>strtoupper($request->email),
-			'phone'=>strtoupper($request->phone),
 			'rol'=>strtoupper('client'),
 			'created_at'=>date('d-m-Y H:i:s ',time()),
 			'pass'=>$pass,
@@ -56,20 +54,18 @@ class Users extends Controller
 			'verified'=>false,
 			'email_verified_at'=>$date->format('Y-m-d H:i:s'),
 		];
-
-
-
-		if (Usuarios\Users::Exists($array)):
+		$array = (object) $array;
+		if (Usuarios\Users::Exists($array->email)):
 			return redirect()->back()->withInput()->with('message','This user or phone is already exist');
 		else:
 			if (Usuarios\Users::Register($array)):
 
 				$id = DB::getPdo()->lastInsertId();
 				
-				$correo = new Mails('Verify your email',$id,$array);
+				$correo = new Mails('Verify your email',$id,$array,'confirmMail');
 
 
-				if (Mail::to($array['email'])->send($correo)===null) 
+				if (Mail::to($array->email)->send($correo)===null) 
 				{
 					return redirect()->back()->with('message','Please, check your email and confirm your email, u have 1 hour');
 				}
@@ -148,6 +144,7 @@ class Users extends Controller
 		$this->validate($request,[
 			'email'=>'required|email',
 			'pass'=>'required|Min:6',
+			'_token'=>'required|Min:6',
 		]);
 
 		if (Usuarios\Users::Exist((strtoupper($request->email)))) 
@@ -207,7 +204,7 @@ class Users extends Controller
 		$user = DB::table('users')->select('*')->find($id);
 		$date = new DateTime();
 		$date->modify('+1 hour');
-	$array = ['email_verified_at'=>$date->format('Y-m-d H:i:s'),'tokken'=>Str::random(100)/*,'id'=>$id*/];
+	$array = ['email_verified_at'=>$date->format('Y-m-d H:i:s'),'tokken'=>Str::random(100)];
 	DB::table('users')->where(['id'=>$id])->update($array);
 	$correo = new Mails('Verify your email',$id,$array);
 	if (Mail::to($user->email)->send($correo)===null) 
@@ -257,9 +254,10 @@ public function LogOut()
 	{
 		$this->validate($request,[
 			'iduser'=>'required|Min:20',
-			'email'=>'required|Min:10',
+			'email'=>'required|Min:10|email',
 			'name'=>'required|Min:5',
 			'lastname'=>'required|Min:5',
+			'_token'=>'required|Min:5',
 			'phone'=>'required|Min:13|Max:13',
 
 		]);
@@ -290,6 +288,68 @@ public function LogOut()
 
 	public function resetPassword(Request $request)
 	{
+		$this::validate($request,['email'=>'required|email']);
+		$request->email = strtoupper($request->email);
+		$data =DB::table('users')->where('email','=',$request->email)->select('*')->first();
+		if(!$data):
+			return redirect()->back()->withInput()->with('message','Invalid email');
+		endif;
+		
+		$data->tokken = Str::random(100);
+		$correo = new Mails('Reset your password',null,$data,'resetPass');
+		
+		if (!Mail::to($request->email)->send($correo)===null) 
+		{
+			return redirect()->back()->with('message','Ups, error');
+		}
+		$date = new DateTime();
+		$date->modify('+1 hour');
+		DB::table('users')->where('id',$data->id)->update(['email_verified_at'=>$date->format('Y-m-d H:i:s'),'tokken'=>$data->tokken]);
+		return redirect()->back()->with('message','Please check your email');
 
 	}
+
+	public function resetPass(Request $request)
+	{
+		$this::validate($request,['id'=>'required|Min:50','tokken'=>'required|Min:50']);
+		$id = Crypt::decryptString($request->id);
+		$tokken = Crypt::decryptString($request->tokken);
+
+		if (!is_numeric(Crypt::decryptString($request->id))&&!is_string(Crypt::decryptString($request->tokken)))
+		{
+			return redirect('User/ForgotPassword')->with('message','Ups, error');
+		}
+		if (!DB::table('users')->where('tokken',$tokken)->where('email_verified_at','>',now())->select('*')->find($id))
+		{
+			return redirect('User/ForgotPassword')->with('message','Invalid tokken');
+		}
+		return view('Users/resetPasswordForm')->with('id',$id);
+	}
+
+	public function resetclave(Request $request)
+	{
+		$this::validate($request,
+			[
+				'pass'=>'required|Min:6|string',
+				'_token'=>'required|string',
+				'repeat'=>'required|Min:6|same:pass|string',
+				'id'=>'required|Min:6|string',
+			]);
+
+		$update = [
+
+			'email_verified_at'=>null,
+			'tokken'=>null,
+			'pass'=>Hash::make($request->pass),
+
+
+		];
+		if (!DB::table('users')->where('id',Crypt::decryptString($request->id))->update($update))
+		{
+			return redirect()->back()->with('message','Ups, error');
+		}
+
+		return redirect('User/SignIn')->with('message','Password changed succefully');
+	}
 }
+
