@@ -14,23 +14,23 @@ class Orders extends Controller
     public function addOrder(Request $request)
     {
         echo "<pre>";
-print_r($_POST);
+        print_r($_POST);
         echo "</pre>";
-       $this->validate($request,[
-        'product'=>'required|Array',
-        'price'=>'required|Array',
-        'stock'=>'required|Array',
-        'nameProduct'=>'required|Array',
-        'brand'=>'required|Array',
-        'total'=>'required',
-        'name'=>'required',
-        'email'=>'required',
-        'phone'=>'required',
-        'payMethod'=>'required',
-        'idUser'=>'required',
-        
+        $this->validate($request,[
+            'product'=>'required|Array',
+            'price'=>'required|Array',
+            'stock'=>'required|Array',
+            'nameProduct'=>'required|Array',
+            'brand'=>'required|Array',
+            'total'=>'required',
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'payMethod'=>'required',
+            'idUser'=>'required',
+            
 
-   ]);
+        ]);
     }
 
     /**
