@@ -124,7 +124,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
 			<div class="card mb-3 "style="border-color: pink">
 				<div class="card-body">
 					<div class="card-img img-fluid img mx-auto mb-2 ">
-						<img src="{{ asset('img/TheSkinPower6.jpg') }}" width="250" height="150" alt="">	
+						<img src="{{ asset('img/TheSkinPower7.jpg') }}" width="250" height="150" alt="">	
 					</div>
 					<h4 class="card-title">El orden de los factores si altera el resultado😱‼️😱‼️</h4>
 					<p class="card-text text-justify">
