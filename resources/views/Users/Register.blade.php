@@ -36,7 +36,7 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Register!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Registrate!</h1>
                             </div>
                             @if ($errors->any())
                            <div class="alert-danger rounded-bottom rounded-left rounded-right rounded-top p-3">
@@ -56,13 +56,13 @@
                                @csrf
 
                                <fieldset class="form-group">
-                                <label for="name" id="mailText">Your First</label>
-                                <input required="" type="text" minlength="5" class="form-control val" id="name" name="name" placeholder="Your firt and last name...">
+                                <label for="name" id="mailText">Tu primer nombre</label>
+                                <input required="" type="text" minlength="5" class="form-control val" id="name" name="name" placeholder="Tu primer nombre...">
                                 <small></small>
                             </fieldset>
                             <fieldset class="form-group">
-                                <label for="name" id="mailText">Your First</label>
-                                <input required="" type="text" minlength="5" class="form-control val" id="name" name="lastname" placeholder="Your last and last name...">
+                                <label for="name" id="mailText">Tu primer apellido</label>
+                                <input required="" type="text" minlength="5" class="form-control val" id="name" name="lastname" placeholder="Tu primer apellido...">
                                 <small></small>
                             </fieldset>
                             <fieldset class="form-group">
@@ -76,9 +76,9 @@
                                 <small>Your phone number, preferably with whatsapp </small>
                             </fieldset> --}}
                             <fieldset class="form-group">
-                                <label for="pass" id="passText">Password</label>
-                                <input type="password" required=""class="form-control  val" minlength="6" name="pass" id="pass" placeholder="Password...">
-                                <small>Password should be at least 6 characters</small>
+                                <label for="pass" id="passText">Contraseña</label>
+                                <input type="password" required=""class="form-control  val" minlength="6" name="pass" id="pass" placeholder="Contraseña...">
+                                <small>La contraseña debe de tener minimo 6 carácteres</small>
                             </fieldset>
                             <input type="submit" class="btn btn-primary btn-user btn-block" name="registrar" value="Register" placeholder="">
                         </form>
@@ -88,7 +88,7 @@
                     <hr>
 
                     <div class="text-center">
-                        <a class="small" href="{{ url('User/SignIn') }}">do u have a account?, Login!</a>
+                        <a class="small" href="{{ url('User/SignIn') }}">Ya tienes una cuenta?, Inicia sesión!</a>
                     </div>
                 </div>
             </div>

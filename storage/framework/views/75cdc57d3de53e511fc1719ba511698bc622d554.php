@@ -30,42 +30,154 @@ background-size: cover; /* Resize the background image to cover the entire conta
 
 	<!-- Wrap the rest of the page in another container to center all the content. -->
 
-	<div class="container marketing">
+	
+	<div class="row">
 
-		<!-- Three columns of text below the carousel -->
-		<div class="row">
-			<div class="col-lg-4">
-				<img class="img-fluid img"style="transition: all 1000ms" src="<?php echo e(asset('img/DINAMIC//Acido hialuronico.png')); ?>" alt="Generic placeholder image" width="140" height="250">
-				<h2>Heading</h2>
-				<p class="text-justify">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+		<div class="col-sm-3">
+			<div class="card mb-3 "style="border-color: pink">
+				<div class="card-body">
+					<div class="card-img img-fluid img mx-auto mb-2 ">
+						<img style="transition:all 1000ms"src="<?php echo e(asset('img/TheSkinPower4.jpg')); ?>" width="250" height="150" alt="">	
+					</div>
+					<h4 class="card-title">Tu tipo de piel</h4>
+					<p class="card-text text-justify">
+						Todos los tipos de pieles deben realizar diferentes rutinas adecuadas a sus necesidades, así que huye de los que te recomienden la misma rutina que ellos usan porque les funcionó.  <br>
 
-			</div><!-- /.col-lg-4 -->
+						Que les haya funcionado a ellos no quiere decir que te funcione a tí, así que acá te dejo unos ejemplos de como debería ser tu rutina según tu tipo de piel 💞 <br>
+					</p>
 
-				<div class="col-lg-4">
-				<img class="img-fluid img"style="transition: all 1000ms" src="<?php echo e(asset('img/DINAMIC//Acido hialuronico.png')); ?>" alt="Generic placeholder image" width="140" height="250">
-				<h2>Heading</h2>
-				<p class="text-justify">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+					<b>PIEL SECA: </b>
+					<ul>
+						<li> Limpiadores tipo syndet o leches limpiadoras</li>
+						<li> Hidratantes densos</li>
+						<li> Protector solar humectante</li>
+						<li> Serums nutritivos: ácido hialurónico, vitaminas C,E y B5, peptidos. </li>
+						<li> Exfoliar 1 vez a la semana </li>
+					</ul>
+					<br>
 
-			</div><!-- /.col-lg-4 -->
+					<b>PIEL GRASA :</b>
+					<ul>
+						<li> Limpiadores en gel </li>
+						<li>Hidratantes en gel </li>
+						<li> Tónico seborregulador</li>
+						<li> Sérum de base acuosa sin aceite: Niacinamide, Vitamina C, Retinol, Ácido Salicílico</li>
+						<li> Protector solar en gel</li> 
+						<li> Exfoliar 2 veces a la semana </li>
+					</ul>
 
-				<div class="col-lg-4">
-				<img class="img-fluid img"style="transition: all 1000ms" src="<?php echo e(asset('img/DINAMIC//Acido hialuronico.png')); ?>" alt="Generic placeholder image" width="140" height="250">
-				<h2>Heading</h2>
-				<p class="text-justify">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+					<b>PIEL MIXTA: </b>
+					<ul>
+						<li> Limpiadores syndet </li>
+						<li> Hidratación nutritiva ligera </li>
+						<li> sérum de base acuosa nutritivos: Marine Hialurónics, Ácido Hialurónico, Ácido Salicílico, Niacinamida. </li>
+						<li> Protector solar ligero humectante </li>
+						<li> Exfoliar 2 veces a la semana</li>
+					</ul>
 
-			</div><!-- /.col-lg-4 -->
+					<b>PIEL SENSIBLE: </b>
+					<ul>
+						<li>Loción limpiadora y agua Thermal </li>
+						<li> Hidratantes ligeros sin alcohol ni fragancias </li>
+						<li> Sérum: ácido hialurónico, marine hialurónics, ascorbyl glucoside, ácido Láctico</li> 
+						<li>Protector solar físico</li>
+						<li> Exfoliar 1 vez a la semana, es aconsejable el ácido Láctico.</li>
+					</ul>
+				</div>
+			</div>
 
-				<div class="col-lg-4">
-				<img class="img-fluid img"style="transition: all 1000ms" src="<?php echo e(asset('img/DINAMIC//Acido hialuronico.png')); ?>" alt="Generic placeholder image" width="140" height="250">
-				<h2>Heading</h2>
-				<p class="text-justify">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
 
-			</div><!-- /.col-lg-4 -->
 
-		</div><!-- /.row -->
 
+		</div>
+
+
+		<div class="col-sm-3">
+			<div class="card mb-3 "style="border-color: pink">
+				<div class="card-body">
+					<div class="card-img img-fluid img mx-auto mb-2 ">
+						<img style="transition:all 1000ms"src="<?php echo e(asset('img/TheSkinPower5.jpg')); ?>" width="250" height="150" alt="">	
+					</div>
+					<h4 class="card-title">Activos que necesitas según tu edad 👶🧓</h4>
+					<p class="card-text text-justify">
+						Muchas veces vamos por la vida comprando tanta cosa que no necesitamos, conoce cuáles son tus necesidades y qué te conviene, recuerda que nuestro principal órgano (la piel) va cambiando con los años, dale lo que necesita. <br> <br>
+
+						<b>Muchach@s nuestra piel nos habla </b><br> <br>
+
+						De 20 a 25 años la rutina debe basarse en una rutina de prevención que consta de hidratación protección, sin embargo yo agregaría antioxidantes de acuerdo a la necesidad de cada piel. <br> <br>
+
+						De 25 a 30 años es momento de añadir retinoides en la rutina, pues son los años en dónde las arrugas y líneas de expresión empiezan a notarse. Durante este tiempo buscaremos combatir el envejecimiento prematuro e impulsar la regeneración celular.<br> <br>
+
+						De 40 a 50 años la capacidad de retención de agua que tenía nuestra piel años atrás no es la misma que estando en estas edades, por lo cual es necesario agregar productos que impulsen la producción de colágeno y retengan de mejor manera la Hidratación, los productos estrellas serán los peptidos, retinoides y antioxidantes. <br> <br>
+
+						De 50 años en adelante es necesario darle un cóctel a nuestra piel de ceramidas, peptidos, antioxidantes e hidrantantes nutritivos<br>
+					</p>
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="col-sm-3">
+			<div class="card mb-3 "style="border-color: pink">
+				<div class="card-body">
+					<div class="card-img img-fluid img mx-auto mb-2 ">
+						<img src="<?php echo e(asset('img/TheSkinPower6.jpg')); ?>" width="250" height="150" alt="">	
+					</div>
+					<h4 class="card-title">EL ORDEN DE LOS FACTORES SI ALTERA EL RESULTADO😱‼️😱‼️</h4>
+					<p class="card-text text-justify">
+					Existen millones de productos en el mercado con diferentes texturas formuladas para cada tipo de piel; estas texturas son el vehículo de nuestros activos para que penetren mejor la piel y así tener los resultados esperados.</p> <br>
+
+					<b>Por eso, es importante que :</b>
+
+					<ul>
+						<li>Tengas el tipo de piel que tengas, hay que aplicar de lo más ligero a lo más denso (ejemplo: la numeración de los productos en el post)</li> 
+
+						<li>Saber qué tipo de textura es la adecuada para tu rostro: para pieles grasas las texturas recomendadas son acuosas y geles, para pieles mixtas y sensibles las texturas deben ser cremas gel ligeras y para pieles secas cremas densas nutritivas. </li>
+
+						<li>Ten en cuenta que si no eliges bien el tipo de textura puedes ocasionar un resultado opuesto a lo que buscas‼️</li>
+
+						<li>Aplicar la cantidad adecuada, más no significa mejores resultados‼️.En mis inicios caí en esto😂🤦🏻‍♀️, no lo hagan, pueden obstruir los poros de tanto producto.</li>
+					</ul>
+
+
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-sm-3">
+			<div class="card mb-3 "style="border-color: pink">
+				<div class="card-body">
+					<div class="card-img img-fluid img mx-auto mb-2 ">
+						<img style="transition:all 1000ms"src="<?php echo e(asset('img/TheSkinPower6.jpg')); ?>" width="250" height="150" alt="">	
+					</div>
+					<h4 class="card-title">Enterate!!</h4>
+					<p class="card-text text-justify">
+						✖️Tocarte la piel, terminar de quitarte los puntos negros o espinillas que te quedaron es mala idea, recuerda que la piel está sensible y propensa a agarrar infecciones y bacterias.  <br><br>
+
+						✖️Maquillarte, lo más recomendable es esperar 72 hrs.  <br><br>
+
+						✖️ Seguir con tu rutina facial, después de una limpieza lo importante es usar hidrantantes, calmantes y regenerantes. Evita usar ácidos, tratamientos anti-acné y retinol. Espera a que pasen las 72 hrs.  <br><br>
+
+						✖️ Hacer ejercicio, el sudor puede irritar cuando la piel está en un estado sensible. <br><br>
+
+						✖️Irte a la playa, el calor y el sol promueven la inflamación. Además estás más propensas a manchas.  <br><br>
+
+						Extra: ✖️Depilarte, no es momento de hacerte las cejas ni el bozo. 
+					</p>
+
+				</div>
+			</div>
+		</div>
 
 	</div>
+
+
+
+</div>
+
 
 </div>
 <?php $__env->stopSection(); ?>

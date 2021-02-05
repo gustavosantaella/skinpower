@@ -33,7 +33,6 @@ class Users extends Controller
 			'name'=>'required|Min:5',
 			'lastname'=>'required|Min:5',
 			'email'=>'required|Min:5|email',
-			/*'phone'=>'required|Min:13|Max:13',*/
 			'pass'=>'required|Min:6',
 
 		]);
@@ -56,7 +55,7 @@ class Users extends Controller
 		];
 		$array = (object) $array;
 		if (Usuarios\Users::Exists($array->email)):
-			return redirect()->back()->withInput()->with('message','This user or phone is already exist');
+			return redirect()->back()->withInput()->with('message','El correo ya existe');
 		else:
 			if (Usuarios\Users::Register($array)):
 
