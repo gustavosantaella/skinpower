@@ -126,7 +126,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
 					<div class="card-img img-fluid img mx-auto mb-2 ">
 						<img src="{{ asset('img/TheSkinPower6.jpg') }}" width="250" height="150" alt="">	
 					</div>
-					<h4 class="card-title">EL ORDEN DE LOS FACTORES SI ALTERA EL RESULTADO😱‼️😱‼️</h4>
+					<h4 class="card-title">El orden de los factores si altera el resultado😱‼️😱‼️</h4>
 					<p class="card-text text-justify">
 					Existen millones de productos en el mercado con diferentes texturas formuladas para cada tipo de piel; estas texturas son el vehículo de nuestros activos para que penetren mejor la piel y así tener los resultados esperados.</p> <br>
 
