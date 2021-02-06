@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\Http\Middleware as m;
+use Illuminate\Support\Facades\View;
 
 session_start();
 /*
@@ -16,42 +18,54 @@ session_start();
 */
 
 /* Page*/
-Route::get('/',function () {
-	return view('welcome');
-});
-Route::get('Page/Store','Products@index');
-Route::post('Page/Store','Cart@addToCart');
+Route::view('/',"welcome")->name('HomePage');
+
+Route::get('Page/Store','Products@index')->name('Ver productos');
+Route::post('Page/Store','Cart@addToCart')->name('Agg produsctos al carrito');
 
 /*Users*/
-Route::get('User/SignIn',function(){
-	return view('Users/SignIn');
-});
 
-Route::post('User/SignIn','Users@SignIn');
 
-Route::get('User/Register',function(){
-	return view('Users/Register');
+Route::group(['prefix'=>'User'],function(){
+
+	Route::view('SignIn','Users.SignIn');
+	Route::post('SignIn','Users@SignIn');
+	Route::view('Register','Users/Register')->name('register');
+	Route::post('Register','Users@Register');
+	Route::get ('Verify/email',"Users@updateVerified");
+	Route::get ('LogOut','Users@LogOut');
+	Route::get ('Profile','Users@Profile');
+	Route::post('Profile','Users@update');
+	Route::get ('resendTokken','Users@resendTokken');
+	Route::view('ForgotPassword','Users.forgotPassword')->name('forgot password');
+	Route::post('ForgotPassword','Users@resetPassword');
+	Route::get ('resetPass','Users@resetPass');
+	Route::post('resetPass','Users@resetclave');
 });
-Route::post('User/Register','Users@Register');
-Route::get('Verify/email',"Users@updateVerified");
-Route::get('User/LogOut','Users@LogOut');
-Route::get('User/Profile','Users@Profile');
-Route::post('User/Profile','Users@update');
-Route::get('User/resendTokken','Users@resendTokken');
-Route::get('User/ForgotPassword',function(){
-	return view('Users/forgotPassword');
-});
-Route::post('User/ForgotPassword','Users@resetPassword');
-Route::get('User/resetPass','Users@resetPass');
-Route::post('User/resetPass','Users@resetclave');
 
 
 /*Cart*/
-Route::get('Cart/Show',function(){
-	return view('Cart/Cart');
-});
+Route::view('Cart/Show','Cart/Cart')->name('show cart');
 Route::post('Cart/remove','Cart@remove');
 
 /*Orders*/
 
 Route::post('Orders/addOrder','Orders@addOrder');
+
+/*Admin*/
+
+Route::group(['prefix'=>'Admin','middleware'=>'isAdmin'], 
+	function()
+	{
+
+		Route::view('Home','Admin.Home')
+		->name('AdminHome');
+
+		Route::View('Products/add','Admin/products/add')->name('add product');
+
+		Route::post('Products/add','Products@create')
+		->name('add');
+
+		Route::get('Admin/Pedidos/list','Orders@list')
+		->name('listar pedidos');
+	});

@@ -14,4 +14,9 @@ class Products extends Model
 
 		return DB::select('SELECT * FROM Products WHERE stock > :stock AND status = :status',[':stock'=>0,':status'=>TRUE]);
 	}
+
+	public static function i(array $array)
+	{
+		return DB::table('products')->insert($array);
+	}
 }

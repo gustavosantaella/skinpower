@@ -13,7 +13,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
 <div class="text-center p-2 h1">
 
 	<div >
-		<p class="font-weight-bold"><p class="h6">The Skin Power</p>Your best choice</p>
+		<p class="font-weight-bold"><p class="h6">The Skin Power</p>Tu mejor elección</p>
 		<p class="typed h5 text-center"></p>
 
 	</div>
@@ -37,7 +37,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
 			<div class="card mb-3 "style="border-color: pink">
 				<div class="card-body">
 					<div class="card-img img-fluid img mx-auto mb-2 ">
-						<img style="transition:all 1000ms"src="<?php echo e(asset('img/TheSkinPower4.jpg')); ?>" width="250" height="150" alt="">	
+						<img src="<?php echo e(asset('img/TheSkinPower4.jpg')); ?>" width="250" height="150" alt="">	
 					</div>
 					<h4 class="card-title">Tu tipo de piel</h4>
 					<p class="card-text text-justify">
@@ -86,9 +86,6 @@ background-size: cover; /* Resize the background image to cover the entire conta
 				</div>
 			</div>
 
-
-
-
 		</div>
 
 
@@ -96,7 +93,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
 			<div class="card mb-3 "style="border-color: pink">
 				<div class="card-body">
 					<div class="card-img img-fluid img mx-auto mb-2 ">
-						<img style="transition:all 1000ms"src="<?php echo e(asset('img/TheSkinPower5.jpg')); ?>" width="250" height="150" alt="">	
+						<img src="<?php echo e(asset('img/TheSkinPower5.jpg')); ?>" width="250" height="150" alt="">	
 					</div>
 					<h4 class="card-title">Activos que necesitas según tu edad 👶🧓</h4>
 					<p class="card-text text-justify">
@@ -123,9 +120,9 @@ background-size: cover; /* Resize the background image to cover the entire conta
 			<div class="card mb-3 "style="border-color: pink">
 				<div class="card-body">
 					<div class="card-img img-fluid img mx-auto mb-2 ">
-						<img src="<?php echo e(asset('img/TheSkinPower6.jpg')); ?>" width="250" height="150" alt="">	
+						<img src="<?php echo e(asset('img/TheSkinPower7.jpg')); ?>" width="250" height="150" alt="">	
 					</div>
-					<h4 class="card-title">EL ORDEN DE LOS FACTORES SI ALTERA EL RESULTADO😱‼️😱‼️</h4>
+					<h4 class="card-title">El orden de los factores si altera el resultado😱‼️😱‼️</h4>
 					<p class="card-text text-justify">
 					Existen millones de productos en el mercado con diferentes texturas formuladas para cada tipo de piel; estas texturas son el vehículo de nuestros activos para que penetren mejor la piel y así tener los resultados esperados.</p> <br>
 
@@ -151,9 +148,9 @@ background-size: cover; /* Resize the background image to cover the entire conta
 			<div class="card mb-3 "style="border-color: pink">
 				<div class="card-body">
 					<div class="card-img img-fluid img mx-auto mb-2 ">
-						<img style="transition:all 1000ms"src="<?php echo e(asset('img/TheSkinPower6.jpg')); ?>" width="250" height="150" alt="">	
+						<img src="<?php echo e(asset('img/TheSkinPower6.jpg')); ?>" width="250" height="150" alt="">	
 					</div>
-					<h4 class="card-title">Enterate!!</h4>
+					<h4 class="card-title">No lo hagas más‼️</h4>
 					<p class="card-text text-justify">
 						✖️Tocarte la piel, terminar de quitarte los puntos negros o espinillas que te quedaron es mala idea, recuerda que la piel está sensible y propensa a agarrar infecciones y bacterias.  <br><br>
 
@@ -175,7 +172,9 @@ background-size: cover; /* Resize the background image to cover the entire conta
 	</div>
 
 
-
+<div>
+	<H1>Servicios</H1>
+</div>
 </div>
 
 
@@ -183,12 +182,6 @@ background-size: cover; /* Resize the background image to cover the entire conta
 <?php $__env->stopSection(); ?>
 
 
-<style>
-	.img:hover{
-		transform: scale(2.4);
-
-	}
-</style>
 
 <?php $__env->startSection('script'); ?>
 <script src="<?php echo e(asset('js/typed.js')); ?>"></script>

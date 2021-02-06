@@ -17,10 +17,18 @@
 	</div>
 	@endforeach
 </ul>
+
+@elseif(!$products)
+
+<div class="alert-warning rounded-top rounded-right rounded-left rounded-bottom p-3 mb-3 font-weight-bold">
+	Ups, no tenemos productos en este momento
+</div>
+
 @endif
 <div class="row">
 	<div class="col">
 		<div class="row">
+
 			@foreach ($products as $element)
 			
 			<div class="col-sm-3">
@@ -30,7 +38,8 @@
 					<div class="card text-center mb-3 "style="border-color: pink">
 						<div class="card-body">
 							<div class="card-img img-fluid img mx-auto mb-2 ">
-								<img src="{{ asset('img/DINAMIC/Acido hialuronico.png') }}" width="150" height="230" alt="">	
+							
+								<img src="{{ asset('storage/'.str_replace('public/',null,$element->photo)) }}" width="150" height="230" alt="">	
 							</div>
 							<h4 class="card-title">{{$element->nameproduct}}</h4>
 							<p class="card-text">Stock: {{$element->stock}}</p>

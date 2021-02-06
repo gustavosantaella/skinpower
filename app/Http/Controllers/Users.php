@@ -159,7 +159,8 @@ class Users extends Controller
 			{
 				if (Hash::Check($request->pass,$var->pass)) 
 				{
-					$_SESSION['name'] = "$var->name $var->lastname";
+					$_SESSION['name'] = "$var->name";
+					$_SESSION['lastname'] = "$var->lastname";
 					$_SESSION['email'] = $var->email;
 					$_SESSION['iduser'] = $var->id;
 					$_SESSION['phone'] = $var->phone;
