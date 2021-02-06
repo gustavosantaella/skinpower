@@ -15,4 +15,20 @@ class Controller extends BaseController
 	public function __construct(){
 		
 	}
+
+	public function htmlspecialchars($array)
+	{
+		
+		foreach($array as $el)
+		{
+			if (!htmlspecialchars($el,ENT_QUOTES,'UTF-8'))
+			 {
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+	}
 }

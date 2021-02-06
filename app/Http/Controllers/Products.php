@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use App\Http\Middleware;
 use App\Models as productos;
 use Stevebauman\Purify\Facades\Purify;
 use DB;
@@ -16,10 +18,10 @@ class Products extends Controller
      */
     public function index()
     {
-     $res = productos\Products::listProductsPage();
+       $res = productos\Products::listProductsPage();
 
-     return view('page.products')->with('products',$res);
- }
+       return view('page.products')->with('products',$res);
+   }
 
     /**
      * Show the form for creating a new resource.
@@ -28,10 +30,7 @@ class Products extends Controller
      */
     public function create(Request $request)
     {
-        echo "<pre>";
-        print_r($_POST);
-        print_r($_FILES);
-        echo "</pre>";
+
         $this::validate($request,
             [
                 '_token'=>'required|Min:20|string',
@@ -45,10 +44,10 @@ class Products extends Controller
 
 
             ]);
-       
+
 
         $array = [
-            'brand'=>addslashes($request->marca).'|required|regex:^[a-zA-Z\s]{2,254}',
+            'brand'=>$request->marca,
             'nameproduct'=>$request->nombre,
             'price'=>$request->precio,
             'stock'=>$request->cantidad,
@@ -57,8 +56,7 @@ class Products extends Controller
             'created_at'=>now(),
 
         ];
-    
-
+        
         if (DB::table('products')->where('nameproduct',$request->nombre)->count()) {
             return redirect()->back()->withInput()->with('message','El nombre del producto ya existe');
         }
@@ -66,8 +64,8 @@ class Products extends Controller
             return redirect()->route('add product');
         }
 
-    return redirect()->route('add product')->with('message','Agregado exitosamente');
-}
+        return redirect()->route('add product')->with('message','Agregado exitosamente');
+    }
     /**
      * Store a newly created resource in storage.
      *

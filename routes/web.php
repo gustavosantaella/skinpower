@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
-use App\Http\Middleware as m;
 use Illuminate\Support\Facades\View;
-
 session_start();
 /*
 |--------------------------------------------------------------------------
@@ -19,13 +17,13 @@ session_start();
 
 /* Page*/
 Route::view('/',"welcome")->name('HomePage');
-
-Route::get('Page/Store','Products@index')->name('Ver productos');
-Route::post('Page/Store','Cart@addToCart')->name('Agg produsctos al carrito');
+Route::group(['prefix'=>'Page'],function()
+{
+	Route::get('Store','Products@index')->name('Ver productos');
+	Route::post('Store','Cart@addToCart')->name('Agg produsctos al carrito');
+});
 
 /*Users*/
-
-
 Route::group(['prefix'=>'User'],function(){
 
 	Route::view('SignIn','Users.SignIn');
@@ -45,27 +43,26 @@ Route::group(['prefix'=>'User'],function(){
 
 
 /*Cart*/
-Route::view('Cart/Show','Cart/Cart')->name('show cart');
-Route::post('Cart/remove','Cart@remove');
+Route::group(['prefix'=>'Cart'],function()
+{
+	Route::view('Show','Cart/Cart')->name('show cart');
+	Route::post('remove','Cart@remove');
+});
 
 /*Orders*/
+Route::group(['prefix'=>'Orders'],function()
+{
+	Route::post('addOrder','Orders@addOrder');
+});
 
-Route::post('Orders/addOrder','Orders@addOrder');
 
 /*Admin*/
 
 Route::group(['prefix'=>'Admin','middleware'=>'isAdmin'], 
 	function()
 	{
-
-		Route::view('Home','Admin.Home')
-		->name('AdminHome');
-
+		Route::view('Home','Admin.Home')->name('AdminHome');
 		Route::View('Products/add','Admin/products/add')->name('add product');
-
-		Route::post('Products/add','Products@create')
-		->name('add');
-
-		Route::get('Admin/Pedidos/list','Orders@list')
-		->name('listar pedidos');
+		Route::post('Products/add','Products@create')->name('add')->middleware('specialchars');
+		Route::get('Admin/Pedidos/list','Orders@list')->name('listar pedidos');
 	});
