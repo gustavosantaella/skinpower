@@ -24,6 +24,7 @@ class Users extends Model
 
 		}
 	}
+	
 	public static function updateVerified(array $datos,$id)
 	{
 		return DB::update('UPDATE  users SET verified=:verified WHERE id=:id',[

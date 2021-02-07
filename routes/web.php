@@ -17,6 +17,7 @@ session_start();
 
 /* Page*/
 Route::view('/',"welcome")->name('HomePage');
+
 Route::group(['prefix'=>'Page'],function()
 {
 	Route::get('Store','Products@index')->name('Ver productos');
@@ -26,18 +27,18 @@ Route::group(['prefix'=>'Page'],function()
 /*Users*/
 Route::group(['prefix'=>'User'],function(){
 
-	Route::view('SignIn','Users.SignIn');
+	Route::view('SignIn','Users.SignIn')->name('signin');
 	Route::post('SignIn','Users@SignIn');
 	Route::view('Register','Users/Register')->name('register');
 	Route::post('Register','Users@Register');
 	Route::get ('Verify/email',"Users@updateVerified");
-	Route::get ('LogOut','Users@LogOut');
-	Route::get ('Profile','Users@Profile');
+	Route::get ('LogOut','Users@LogOut')->name('logout');
+	Route::get ('Profile','Users@Profile')->name('profile');
 	Route::post('Profile','Users@update');
 	Route::get ('resendTokken','Users@resendTokken');
 	Route::view('ForgotPassword','Users.forgotPassword')->name('forgot password');
 	Route::post('ForgotPassword','Users@resetPassword');
-	Route::get ('resetPass','Users@resetPass');
+	Route::get ('resetPass','Users@resetPass')->name('resetPass');
 	Route::post('resetPass','Users@resetclave');
 });
 
@@ -52,7 +53,7 @@ Route::group(['prefix'=>'Cart'],function()
 /*Orders*/
 Route::group(['prefix'=>'Orders'],function()
 {
-	Route::post('addOrder','Orders@addOrder');
+	Route::post('addOrder','Orders@addOrder')->name('addOrder');
 });
 
 
@@ -64,5 +65,6 @@ Route::group(['prefix'=>'Admin','middleware'=>'isAdmin'],
 		Route::view('Home','Admin.Home')->name('AdminHome');
 		Route::View('Products/add','Admin/products/add')->name('add product');
 		Route::post('Products/add','Products@create')->name('add')->middleware('specialchars');
-		Route::get('Admin/Pedidos/list','Orders@list')->name('listar pedidos');
+		Route::get('Pedidos/list','Orders@list')->name('listar pedidos');
+		Route::get('Pedidos/ver/{id}/{iduser}','detail_order@view')->name('ver pedido');
 	});

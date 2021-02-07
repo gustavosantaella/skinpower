@@ -7,7 +7,7 @@ $prdocut= [];
 
 <div class="container-fluid">
 	@if (session('message'))
-	<div class="alert-{{session('type')}} rounded-top rounded-right rounded-left rounded-bottom font-weight-bold p-3 mb-3">
+	<div class="alert-info rounded-top rounded-right rounded-left rounded-bottom font-weight-bold p-3 mb-3">
 		{{session('message')}}
 	</div>
 
@@ -92,11 +92,11 @@ $prdocut= [];
 
 		@for($i=0; $i<count($product['product']); $i++)
 		<div class="d-flex" hidden="">
-			<input type="hidden" name="product[]" value="{{ Crypt::encryptString( $product['product'][$i])}}">
-			<input type="hidden" name="price[]" value="{{  Crypt::encryptString($product['price'][$i])}}">
-			<input type="hidden" name="stock[]" value="{{  Crypt::encryptString($product['stock'][$i])}}">
-			<input type="hidden" name="nameProduct[]" value="{{  Crypt::encryptString($product['nameProduct'][$i])}}">
-			<input type="hidden" name="brand[]" value="{{  Crypt::encryptString($product['brand'][$i])}}">
+			<input type="hidden" name="product[]" value="{{  $product['product'][$i]}}">
+			<input type="hidden" name="price[]" value="{{  $product['price'][$i]}}">
+			<input type="hidden" name="stock[]" value="{{  $product['stock'][$i]}}">
+			<input type="hidden" name="nameProduct[]" value="{{  $product['nameProduct'][$i]}}">
+			<input type="hidden" name="brand[]" value="{{  $product['brand'][$i]}}">
 			<input type="hidden" name="idUser" value="{{   Crypt::encryptString($_SESSION['iduser']) }}">
 
 		</div>

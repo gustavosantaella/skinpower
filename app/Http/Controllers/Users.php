@@ -204,27 +204,27 @@ class Users extends Controller
 		$user = DB::table('users')->select('*')->find($id);
 		$date = new DateTime();
 		$date->modify('+1 hour');
-	$array = ['email_verified_at'=>$date->format('Y-m-d H:i:s'),'tokken'=>Str::random(100)];
-	DB::table('users')->where(['id'=>$id])->update($array);
-	$correo = new Mails('Verify your email',$id,$array);
-	if (Mail::to($user->email)->send($correo)===null) 
-	{
-		return redirect('User/SignIn')->with('message','Please, check your email and confirm your email, u have 1 hour');
+		$array = ['email_verified_at'=>$date->format('Y-m-d H:i:s'),'tokken'=>Str::random(100)];
+		DB::table('users')->where(['id'=>$id])->update($array);
+		$correo = new Mails('Verify your email',$id,$array);
+		if (Mail::to($user->email)->send($correo)===null) 
+		{
+			return redirect('User/SignIn')->with('message','Please, check your email and confirm your email, u have 1 hour');
+		}
+		else
+		{
+			return redirect()->back()->with('message','Error');
+		}
 	}
-	else
-	{
-		return redirect()->back()->with('message','Error');
-	}
-}
 
 
-public function LogOut()
-{
-	if (session_destroy())
+	public function LogOut()
 	{
-		return redirect('/');
+		if (session_destroy())
+		{
+			return redirect('/');
+		}
 	}
-}
 
 	/**
 	 * Show the form for editing the specified resource.

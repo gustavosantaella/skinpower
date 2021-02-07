@@ -28,7 +28,7 @@
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+						<div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
 						Administradores registrados</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">
 
@@ -47,7 +47,7 @@
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+						<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
 						Ventas</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">+10</div>
 					</div>
@@ -63,7 +63,7 @@
 			<div class="card-body">
 				<div class="row no-gutters align-items-center">
 					<div class="col mr-2">
-						<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+						<div class="text-xs font-weight-bold text-info text-uppercase mb-1">
 						Pedidos pendientes</div>
 						<div class="h5 mb-0 font-weight-bold text-gray-800">	
 							<?php echo e((DB::table('orders')->where('status',FALSE)->count()>100)?"+100": DB::table('orders')->where('status',FALSE)->count()); ?>
