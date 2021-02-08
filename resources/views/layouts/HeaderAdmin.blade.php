@@ -98,8 +98,8 @@ rel="stylesheet">
 				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Productos:</h6>
-						<a class="collapse-item" href="Products/add">Agregar Productos</a>
-						<a class="collapse-item" href="Products/list">Listar Productos</a>
+						<a class="collapse-item" href="{{ route('add product') }}">Agregar Productos</a>
+						<a class="collapse-item" href="{{ route('listar productos') }}">Listar Productos</a>
 
 						<div class="collapse-divider"></div>
 						<h6 class="collapse-header">Otras opciones:</h6>

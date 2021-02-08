@@ -13,14 +13,21 @@ class detail_order extends Model
 
 	public static function create($array)
 	{
-		for ($i=0; $i <count($array['idproduct']) ; $i++)
+		for ($i=-0; $i <count($array['idproduct']) ; $i++)
 		{ 
-			return DB::table(self::table)->insert([
+			
+			$query=	DB::table(self::table)->insert([
 				'idproduct'=>$array['idproduct'][$i],
 				'idorder'=>$array['idorder'][0],
 				'price'=>(double)$array['price'][$i],
 				'stock'=>$array['stock'][$i],
 			]);
 		}
+
+		if (!$query) {
+			return false;
+		}
+
+		return true;
 	}
 }

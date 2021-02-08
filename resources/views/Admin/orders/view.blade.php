@@ -23,7 +23,7 @@ $prdocut= [];
 
 	<div class="card ">
 		<div class="card-body">
-			<h4 class="card-title">Pedido #:{{$id}}</h4>
+			<h4 class="card-title">Pedido #{{$id}}</h4>
 			<h6 class="card-subtitle mb-2 text-muted">{{"$user->name $user->lastname"}}</h6>
 
 			<div class="card-body">
@@ -31,11 +31,11 @@ $prdocut= [];
 
 					<thead>
 						<tr>
-							<th width="25">Product</th>
-							<th width="25">Brand</th>
-							<th width="25">Stock</th>
-							<th width="25">Price</th>
-							<th width="25">Total</th>
+							<th width="20">Producto</th>
+							<th width="20">Marca</th>
+							<th width="20">Cantidad</th>
+							<th width="20">Precio</th>
+							<th width="20">Total</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -45,8 +45,8 @@ $prdocut= [];
 							@csrf
 
 							<tr>
-								<td width="25"> {{$value['nameproduct'] }}</td>
-								<td width="25">{{$value['brand']}}</td>
+								<td width="20"> {{$value['nameproduct'] }}</td>
+								<td width="05">{{$value['brand']}}</td>
 								<td hidden="">
 									{{ $product['product'][]=Crypt::encryptString($value['idproduct'])}}
 									{{ $product['nameProduct'][]=Crypt::encryptString($value['nameproduct'] )}}
@@ -54,12 +54,12 @@ $prdocut= [];
 									{{ $product['stock'][]=Crypt::encryptString($value['stock'])}}
 									{{ $product['brand'][]=Crypt::encryptString($value['brand'])}}
 								</td>
-								<td width="25">{{$value['stock']}}</td>
-								<td width="25">$./{{number_format($value['price'],2,',','.')}}</td>
-								<td width="25">$./{{number_format($value['price']*$value['stock'],2,',','.')}}</td>
+								<td width="20">{{$value['stock']}}</td>
+								<td width="20">$./{{number_format($value['price'],2,',','.')}}</td>
+								<td width="20">$./{{number_format($value['price']*$value['stock'],2,',','.')}}</td>
 
 
-								<td hidden=""><input type="hidden" readonly  required="" name="IdProduct" value="{{Crypt::encryptString($value['idproduct'])}}" placeholder=""></td>
+								{{-- <td hidden=""><input type="hidden" readonly  required="" name="IdProduct" value="{{Crypt::encryptString($value['idproduct'])}}" placeholder=""></td> --}}
 
 								<td hidden="">{{ $total+=($value['price']*$value['stock'])}}</td>
 							</tr>
@@ -76,57 +76,78 @@ $prdocut= [];
 		</div>
 	</div>
 	
-	<form method="post" action="{{ url('Orders/addOrder') }}">
-		@csrf
+	<div class="">
+		<form method="post" action="{{ route('add ventas') }}">
+			@csrf
 
-		<h1>Realizado por:</h1>
+			<h1>Realizado por:</h1>
 
-		@for($i=0; $i<count($product['product']); $i++)
-		<div class="d-flex" hidden="">
-			<input type="hidden" name="product[]" value="{{  $product['product'][$i]}}">
-			<input type="hidden" name="price[]" value="{{  $product['price'][$i]}}">
-			<input type="hidden" name="stock[]" value="{{  $product['stock'][$i]}}">
-			<input type="hidden" name="nameProduct[]" value="{{  $product['nameProduct'][$i]}}">
-			<input type="hidden" name="brand[]" value="{{  $product['brand'][$i]}}">
-			<input type="hidden" name="idUser" value="{{ Crypt::encryptString($_SESSION['iduser']) }}">
+			@for($i=0; $i<count($product['product']); $i++)
+			<div class="d-flex" hidden="">
+				<input type="hidden" name="product[]" value="{{  $product['product'][$i]}}">
+				<input type="hidden" name="price[]" value="{{  $product['price'][$i]}}">
+				<input type="hidden" name="stock[]" value="{{  $product['stock'][$i]}}">
+				<input type="hidden" name="nameProduct[]" value="{{  $product['nameProduct'][$i]}}">
+				<input type="hidden" name="brand[]" value="{{  $product['brand'][$i]}}">
+				<input type="hidden" name="idUser" value="{{ Crypt::encryptString($user->iduser) }}">
 
-		</div>
+			</div>
 
-		@endfor
-		<input type="hidden" name="total" value="{{Crypt::encryptString(number_format($total,2,',','.'))}}" placeholder="">
-		<fieldset class="form-group">
+			@endfor
+			<input type="hidden" name="total" value="{{Crypt::encryptString(number_format($total,2,',','.'))}}" placeholder="">
+			<fieldset class="form-group">
 
-			<label for="name">Nombre </label>
-			<input type="text" class="form-control" id="name" required=""  readonly="" value="{{"$user->name $user->lastname"}}">
+				<label for="name">Nombre </label>
+				<input type="text" class="form-control" id="name" required=""  readonly="" value="{{"$user->name $user->lastname"}}">
 
-			{{-- 	<input type="hidden" class="form-control" id="name" required="" name="name" readonly="" value="{{ "$user->name $user->lastname"}}"> --}}
-		</fieldset>
+				<input type="hidden" class="form-control" id="name" required="" name="name" readonly="" value="{{Crypt::encryptString("$user->name $user->lastname")}}">
+			</fieldset>
 
-		<fieldset class="form-group">
-			<label for="email">Email</label>
-			{{-- <input type="hidden" class="form-control" id="email" required="" name="email" readonly="" value="{{ $user->email}}"> --}}
+			<fieldset class="form-group">
+				<label for="email">Email</label>
+				<input type="hidden" class="form-control" id="email" required="" name="email" readonly="" value="{{Crypt::encryptString($user->email)}}">
 
-			<input type="text" class="form-control" id="email" required=""  readonly="" value="{{ $user->email}}">
-		</fieldset>
+				<input type="text" class="form-control" id="email" required=""  readonly="" value="{{ $user->email}}">
+			</fieldset>
 
-		<fieldset class="form-group">
-			<label for="phone">Teléfono</label>
-{{-- 			<input type="hidden" class="form-control" id="phone" name="phone" required="" readonly="" value="{{   $user->phone}}">
- --}}
-			<input type="tel" class="form-control" id="phone"  required="" readonly="" value="{{  $user->phone}}">
-		</fieldset>
+			<fieldset class="form-group">
+				<label for="phone">Teléfono</label>
+				<input type="hidden" class="form-control" id="phone" name="phone" required="" readonly="" value="{{  Crypt::encryptString($user->phone)}}">
 
-		<fieldset class="form-group">
-			<h3>Método de pago</h3> 
-			
-			<input type="text" disabled="" class="form-control" name="pay" value="{{ $user->pay}}" placeholder="">
-		</fieldset>
-		<button type="submit" class="btn btn-primary font-weight-bold">Aceptar</button>
-		<a  class="btn btn-danger font-weight-bold">Declinar</a>
-	</form>
+				<input type="tel" class="form-control" id="phone"  required="" readonly="" value="{{  $user->phone}}">
+			</fieldset>
+
+			<fieldset class="form-group">
+				<h3>Método de pago</h3> 
+
+				<input type="text" disabled="" class="form-control"  value="{{ $user->pay}}" placeholder="">
+				<input type="hidden" required="" class="form-control" name="pay" value="{{Crypt::encryptString($user->pay)}}" placeholder="">
+			</fieldset>
+			<button type="submit" class="btn btn-primary font-weight-bold">Aceptar</button>
+		</form>
+		<br>
+		<form action="{{ route('eliminar') }}" method="post" >
+			@csrf
+
+			@for($i=0; $i<count($product['product']); $i++)
+			<div class="d-flex" hidden="">
+				<input type="hidden" name="idproduct[]" value="{{  $product['product'][$i]}}">
+				<input type="hidden" name="stock[]" value="{{  $product['stock'][$i]}}">
+				<input type="hidden" name="idorder" value="{{  Crypt::encryptString($id)}}">
 
 
 
-	
+
+			</div>
+
+			@endfor
+			<button type="submit"  class="btn btn-danger font-weight-bold">Declinar</button>
+		</form>
+
+
+	</div>
+
+
+
 </div>
 @stop

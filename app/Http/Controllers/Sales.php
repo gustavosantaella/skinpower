@@ -11,9 +11,26 @@ class Sales extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function add(Request $request)
     {
-        //
+
+        $this::validate($request,[
+            '_token'=>'required',
+            'product'=>'required|array',
+            'price'=>'required|array',
+            'stock'=>'required|array',
+            'nameProduct'=>'required|array',
+            'brand'=>'required|array',
+            'idUser'=>'required',
+            'total'=>'required',
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'pay'=>'required',
+        ]);
+        echo "<pre>";
+        print_r($request->all());
+        echo "</pre>";
     }
 
     /**

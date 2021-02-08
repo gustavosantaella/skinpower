@@ -56,15 +56,39 @@ class Orders extends Model
 		for($i= 0; $i<count($array['idproduct']); $i++)
 		{
 
-			return	DB::update("UPDATE products SET stock=stock-:cantidad WHERE idproduct=:idproduct",
+			$query=	DB::update("UPDATE products SET stock=stock-:cantidad WHERE idproduct=:idproduct",
 				[
 					':cantidad'=>$array['stock'][$i],
 					':idproduct'=>$array['idproduct'][$i]
 				]
 			);
 		}
+
+		if (!$query) {
+			return false;
+		}
+
+		return true;
 	}
 
+	public static function sumarCantidad($array)
+	{
+		for($i= 0; $i<count($array['idproduct']); $i++)
+		{
+
+			$query=	DB::update("UPDATE products SET stock=stock+:cantidad WHERE idproduct=:idproduct",
+				[
+					':cantidad'=>$array['stock'][$i],
+					':idproduct'=>$array['idproduct'][$i]
+				]
+			);
+		}
+		if (!$query) {
+			return false;
+		}
+
+		return true;
+	}
 
 	
 }

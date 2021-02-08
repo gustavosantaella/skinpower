@@ -18,6 +18,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        \App\Events\Destroydetail_order::class=>[
+            \App\Listeners\Destroy_order::class
+        ]
     ];
 
     /**

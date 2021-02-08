@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models as order;
 use App\Models as detail;
 use DB;
+use App\Events as e;
 
 class Orders extends Controller
 {
@@ -64,6 +65,8 @@ class Orders extends Controller
 		$datos['idUser'][]= Crypt::decryptString($request->idUser);
 		$datos['total'][] =number_format($total,2,',','.');
 		$datos['payMethod'][]= Crypt::decryptString($request->payMethod);
+	
+
 		if (!order\Orders::exists($datos) || !order\Orders::stockExist($datos))
 		{
 
@@ -89,15 +92,10 @@ class Orders extends Controller
 		}
 
 		unset($_SESSION['carrito']);
-		return redirect()->back()->with('message','Agregado exitosamente.');
+		return redirect()->back()->with('message','Nos comunicaremos con usted via email o por mensaje a su número de teléfono.');
 		
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 	public function list()
 	{
 		$list =DB::table('orders')
@@ -119,46 +117,40 @@ class Orders extends Controller
 		return view('Admin.orders.list',compact('list'));
 	}
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
+	public function destroy(Request $request)
 	{
-		//
-	}
+		
+		$this::validate($request,[
+			'idproduct'=>'required',
+			'idorder'=>'required',
+			'stock'=>'required',
+			'_token'=>'required'
+		]);
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, $id)
-	{
-		//
-	}
+		$data =[];
+		for ($i=0; $i <count($request->idproduct) ; $i++) { 
+			if (is_numeric(Crypt::decryptString($request->idproduct[$i]))&&is_numeric(Crypt::decryptString($request->idorder))&&is_numeric(Crypt::decryptString($request->stock[$i]))) 
+			{
+				$data['idproduct'][]=Crypt::decryptString($request->idproduct[$i]);
+				$data['stock'][]=Crypt::decryptString($request->stock[$i]);
+			}
+		}
+		$data['idorder'][] = Crypt::decryptString($request->idorder);
+		
+		if (!order\Orders::sumarCantidad($data)) 
+		{
+			redirect()->back()->with('message','Error al Sumar cantidad');
+		}
+		if (!detail\detail_order::where('idorder',$data['idorder'])->delete())
+		{
+			redirect()->back()->with('message','Error al eliminar el pedido');
+		}
+		if (!order\orders::where('id',$data['idorder'])->delete())
+		{
+			redirect()->back()->with('message','Error al eliminar el pedido');
+		}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id)
-	{
-		//
+		return redirect()->route('listar pedidos')->with('message','Pedido eliminado exitosamente');
+		
 	}
 }

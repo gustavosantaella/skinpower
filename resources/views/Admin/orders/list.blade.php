@@ -1,7 +1,11 @@
 @extends('layouts.HeaderAdmin')
 
 @section('content')
-
+@if (session('message'))
+	<div class="alert alert-info rounded-top rounded-right rounded-left rounded-bottom p-3">
+		{{session('message')}}
+	</div>
+@endif
 <table class="table table-responsive table-inverse  table-hover text-center">
 	<thead>
 		<tr>
