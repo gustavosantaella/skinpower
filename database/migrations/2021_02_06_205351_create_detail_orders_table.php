@@ -23,8 +23,8 @@ class CreateDetailOrdersTable extends Migration
    
 
 
-            $table->foreign('idproduct')->references('idproduct')->on('products')/*->onDelete('cascade')*/;
-            $table->foreign('idorder')->references('id')->on('orders')/*->onDelete('cascade')*/;
+            $table->foreign('idproduct')->references('idproduct')->on('products')->onDelete('cascade');
+            $table->foreign('idorder')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

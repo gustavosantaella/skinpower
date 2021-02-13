@@ -283,7 +283,32 @@ class Users extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		if (Crypt::decryptString($id)) {
+			$id =	Crypt::decryptString($id);
+			$order = DB::table('orders')
+			->join('users','users.id','=','orders.iduser')
+			->join('detail_orders','detail_orders.idorder','=','orders.id')
+			->select('detail_orders.stock as stock','detail_orders.idproduct','orders.id')
+			->where('iduser',$id)->get();
+			
+			if (!usuarios\Orders::where('iduser',$id)->count()) {
+				$user = usuarios\Users::find($id);
+				$user->delete();
+				return redirect()->back()->with('message','Eliminado exitosamente');
+			};
+			
+			if (!usuarios\Orders::sumarCantidad($order)) {
+				return redirect()->back()->with('message','Ups, error');
+			}
+
+			
+			$query = DB::table('users')
+			->join('orders','orders.iduser','=','users.id')
+			->where('users.id',$id)
+			->delete();
+	
+			return redirect()->back()->with('message','Eliminado exitosamente');
+		}
 	}
 
 	public function resetPassword(Request $request)
@@ -350,6 +375,20 @@ class Users extends Controller
 		}
 
 		return redirect('User/SignIn')->with('message','Password changed succefully');
+	}
+
+	public function adminsList()
+	{
+
+		$users =(usuarios\Users::where('rol','=','ADMIN')->orWhere('rol','=','SU')->paginate(20));
+		return view('Admin.Users.admin', compact('users'));	
+	}
+
+	public function usersList()
+	{
+
+		$users =(usuarios\Users::where('rol','=','CLIENT')->paginate(20));
+		return view('Admin.Users.client', compact('users'));	
 	}
 }
 

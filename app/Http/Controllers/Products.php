@@ -8,117 +8,140 @@ use App\Http\Middleware;
 use App\Models as productos;
 use Stevebauman\Purify\Facades\Purify;
 use DB;
-
+use Crypt;
+use Storage;
 class Products extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-       $res = productos\Products::listProductsPage();
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		$res = productos\Products::listProductsPage();
 
-       return view('page.products')->with('products',$res);
-   }
+		return view('page.products')->with('products',$res);
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create(Request $request)
+	{
 
-        $this::validate($request,
-            [
-                '_token'=>'required|Min:20|string',
-                'marca'=>'required|string',
-                'nombre'=>'required|string',
-                'status'=>'required|boolean',
-                'descripcion'=>'required|string',
-                'cantidad'=>'required|numeric',
-                'precio'=>'required|numeric',
-                'foto'=>'required|Max:70000|image',
-
-
-            ]);
+		$this::validate($request,
+			[
+				'_token'=>'required|Min:20|string',
+				'marca'=>'required|string',
+				'nombre'=>'required|string',
+				'status'=>'required|boolean',
+				'descripcion'=>'required|string',
+				'cantidad'=>'required|numeric',
+				'precio'=>'required|numeric',
+				'foto'=>'required|Max:70000|image',
 
 
-        $array = [
-            'brand'=>$request->marca,
-            'nameproduct'=>$request->nombre,
-            'price'=>$request->precio,
-            'stock'=>$request->cantidad,
-            'status'=>$request->status,
-            'photo'=>$request->file('foto')->store('public/img'),
-            'created_at'=>now(),
+			]);
 
-        ];
-        
-        if (DB::table('products')->where('nameproduct',$request->nombre)->count()) {
-            return redirect()->back()->withInput()->with('message','El nombre del producto ya existe');
-        }
-        if (!productos\Products::i($array)) {
-            return redirect()->route('add product');
-        }
 
-        return redirect()->route('add product')->with('message','Agregado exitosamente');
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+		$array = [
+			'brand'=>$request->marca,
+			'nameproduct'=>$request->nombre,
+			'price'=>$request->precio,
+			'stock'=>$request->cantidad,
+			'status'=>$request->status,
+			'photo'=>$request->file('foto')->store('public/img'),
+			'created_at'=>now(),
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+		];
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+		if (DB::table('products')->where('nameproduct',$request->nombre)->count()) {
+			return redirect()->back()->withInput()->with('message','El nombre del producto ya existe');
+		}
+		if (!productos\Products::i($array)) {
+			return redirect()->route('add product');
+		}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+		return redirect()->route('add product')->with('message','Agregado exitosamente');
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+	public function list()
+	{
+
+		$products  = productos\Products::paginate(10);
+		return view('Admin.products.list',compact('products'));
+	}
+
+	public function destroy( $idproduct)
+	{
+		if (!is_numeric(Crypt::decryptString($idproduct))) {
+			abort(500);
+		}
+		$idpro = Crypt::decryptString($idproduct);
+		$delete = productos\products::where('idproduct',$idpro);
+		$deleteOrder = productos\detail_order::where('idproduct',$idpro)->count();
+		if ($deleteOrder > 0) {
+			return redirect()->back()->with('message','No se puede eliminar, verifique que no haya pedidos asociado a este producto, si desea eliminar este producto, elimine los pedidos asociados a este.');
+		}
+		$img = productos\products::where('idproduct',$idpro)->first();
+		Storage::delete($img->photo); 
+		if (!$delete->delete()) {
+			return redirect()->back()->with('message','Error al eliminar');
+
+		}
+		return redirect()->back()->with('message','Eliminado exitosamente');
+	}
+
+
+	public function edit($id)
+	{
+		if (!is_numeric(Crypt::decryptString($id))) {
+			abort(500);
+		}
+
+		$idpro = Crypt::decryptString($id);
+		$producto = productos\products::where('idproduct',$idpro)->first();
+
+		return view('Admin.products.edit',compact('producto'));
+	}
+
+	public function update(Request $request)
+	{
+		$this::validate($request,
+			[
+				'_token'=>'required|Min:20|string',
+				'marca'=>'required|string',
+				'nameproduct'=>'required|string|unique:products,nameproduct,'.Crypt::decryptString($request->idproduct).',idproduct',
+				'status'=>'required|boolean',
+				'cantidad'=>'required|numeric',
+				'precio'=>'required|numeric',
+				'idproduct'=>'required',
+
+
+			]);
+
+
+		$array = [
+			'brand'=>$request->marca,
+			'nameproduct'=>$request->nameproduct,
+			'price'=>$request->precio,
+			'stock'=>$request->cantidad,
+			'status'=>$request->status,
+			
+
+		];
+
+		/*if (DB::table('products')->where('nameproduct',$request->nombre)->count()) {
+			return redirect()->back()->withInput()->with('message','El nombre del producto ya existe');
+		}*/
+		if (!productos\Products::edit($array,Crypt::decryptString($request->idproduct))) {
+		abort(500);
+		
+		}
+
+		return redirect()->route('listar productos')->with('message','Actualizado correctamente');
+	}
 }

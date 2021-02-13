@@ -33,7 +33,9 @@
 
 	<fieldset class="form-group">
 		<label for="phone">Your phone</label>
-		<input type="tel" class="form-control" id="phone"required=""  minlength="13" min="13" max="13" maxlength="13" name="phone"value="<?php echo e($user->phone); ?>" placeholder="Phone...">
+		<input type="tel" class="form-control <?php if($_SESSION['phone'] ==''): ?>
+			border-danger
+		<?php endif; ?>" id="phone"required=""  minlength="13" min="13" max="13" maxlength="13" name="phone"value="<?php echo e($user->phone); ?>" placeholder="Phone...">
 	</fieldset>
 
 	<fieldset class="form-group">

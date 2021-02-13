@@ -31,57 +31,75 @@ class Orders extends Model
 		for($i= 0; $i<count($array['idproduct']); $i++)
 		{
 
-			return	DB::table('products')
+			$query=	DB::table('products')
 			->where('idproduct',$array['idproduct'][$i])
 			->select('*')
 			->count();
-		}
-		
-	}
-
-	public static function stockExist($array)
-	{
-		for($i= 0; $i<count($array['idproduct']); $i++)
-		{
-
-			return	DB::table('products')
-			->where('idproduct',$array['idproduct'][$i])
-			->where('stock','>',$array['stock'][$i])
-			->select('*')->count();
-		}
-	}
-
-	public static function restarCantidad($array)
-	{
-		for($i= 0; $i<count($array['idproduct']); $i++)
-		{
-
-			$query=	DB::update("UPDATE products SET stock=stock-:cantidad WHERE idproduct=:idproduct",
-				[
-					':cantidad'=>$array['stock'][$i],
-					':idproduct'=>$array['idproduct'][$i]
-				]
-			);
 		}
 
 		if (!$query) {
 			return false;
 		}
-
 		return true;
+		
 	}
 
-	public static function sumarCantidad($array)
+	public static function stockExist($array)
 	{
+		$data = [];
+		
 		for($i= 0; $i<count($array['idproduct']); $i++)
 		{
 
-			$query=	DB::update("UPDATE products SET stock=stock+:cantidad WHERE idproduct=:idproduct",
+			$data[]= DB::table('products')
+			->where('idproduct',$array['idproduct'][$i])
+			->where('stock','>=',$array['stock'][$i])
+			->select('*')->count();
+		}
+		return $data;
+	}
+
+	public static function restarCantidad($array)
+	{
+		$data = [];
+		for($i= 0; $i<count($array['idproduct']); $i++)
+		{
+
+			$data[]= DB::update("UPDATE products SET stock=stock-:cantidad WHERE idproduct=:idproduct",
 				[
 					':cantidad'=>$array['stock'][$i],
 					':idproduct'=>$array['idproduct'][$i]
 				]
 			);
+		}
+		return $data;
+
+	}
+
+	public static function sumarCantidad($array)
+	{
+		if (is_object($array)) {
+			foreach ($array as $e) {
+				$query=	DB::update("UPDATE products SET stock=stock+:cantidad WHERE idproduct=:idproduct",
+					[
+						':cantidad'=>$e->stock,
+						':idproduct'=>$e->idproduct
+					]
+				);
+			}
+		}
+		else
+		{
+			for($i= 0; $i<count($array['idproduct']); $i++)
+			{
+
+				$query=	DB::update("UPDATE products SET stock=stock+:cantidad WHERE idproduct=:idproduct",
+					[
+						':cantidad'=>$array['stock'][$i],
+						':idproduct'=>$array['idproduct'][$i]
+					]
+				);
+			}
 		}
 		if (!$query) {
 			return false;

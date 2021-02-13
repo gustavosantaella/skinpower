@@ -61,7 +61,7 @@
 								<input type="hidden" name="brand" value="{{Crypt::encryptString($element->brand)}}" placeholder="">
 								<input type="hidden" name="id" value="{{Crypt::encryptString($element->idproduct)}}" placeholder="">
 							</div>
-							<button type="submit" class="btn btn-primary mt-3">Add to cart</button>
+							<button type="submit" class="btn btn-primary mt-3">Añadir</button>
 						</div>
 					</div>
 				</form>

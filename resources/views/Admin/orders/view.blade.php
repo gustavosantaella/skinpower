@@ -90,6 +90,7 @@ $prdocut= [];
 				<input type="hidden" name="nameProduct[]" value="{{  $product['nameProduct'][$i]}}">
 				<input type="hidden" name="brand[]" value="{{  $product['brand'][$i]}}">
 				<input type="hidden" name="idUser" value="{{ Crypt::encryptString($user->iduser) }}">
+				<input type="hidden" name="idorder" value="{{ Crypt::encryptString($id) }}">
 
 			</div>
 

@@ -64,13 +64,21 @@ Route::group(['prefix'=>'Admin','middleware'=>'isAdmin'],
 	{
 		Route::view('Home','Admin.Home')->name('AdminHome');
 		Route::View('Products/add','Admin/products/add')->name('add product');
+		Route::View('Products/edit','Products@edit')->name('editproduct');
+		Route::post('Products/edit','Products@update')->name('editproduct');
 		Route::post('Products/add','Products@create')->name('add')->middleware('specialchars');
-		Route::get('Products/list','Products@create')->name('listar productos');
+		Route::get('Products/list','Products@list')->name('listar productos');
 		Route::get('Pedidos/list','Orders@list')->name('listar pedidos');
 		Route::get('Pedidos/ver/{id}/{iduser}','detail_order@view')->name('ver pedido');
 		Route::post('Pedidos/eliminar','Orders@destroy')->name('eliminar')->middleware('specialchars');
 
 		Route::post('Ventas/add','Sales@add')->name('add ventas')->middleware('specialchars');
-
-
+		Route::get('Ventas/list','Sales@list')->name('listar ventas');
+		Route::get('Ventas/ver/{id}/{nameuser}','detail_sale@view')->name('ver venta');
+		Route::get('Products/remove/{id}','Products@destroy')->name('eliminar producto');
+		Route::get('Products/edit/{idproduct}','Products@edit')->name('modificar producto');
+		Route::post('Ventas/eliminar','Sales@destroy')->name('eliminar venta')->middleware('specialchars');
+		Route::get('Admin/list','Users@adminsList')->name('listar admin');
+		Route::get('User/list','Users@usersList')->name('listar clientes');
+		Route::get('User/remove/{id}','Users@destroy')->name('eliminar user');
 	});

@@ -107,6 +107,16 @@ rel="stylesheet">
 							<span class="badge badge-danger badge-counter"><?php echo (isset($_SESSION['carrito']))? count($_SESSION['carrito']):0; ?></span>
 						</a>
 					</li>
+					<?php if($_SESSION['phone'] ==''): ?>
+					<li class="nav-item dropdown no-arrow mx-1">
+						<a class="nav-link dropdown-toggle" href="<?php echo e(route('listar pedidos')); ?>" id="alertsDropdown" >
+							<i class="fas fa-bell"></i>
+							<!-- Counter - Alerts -->
+							<span class="badge badge-danger badge-counter">*</span>
+
+						</a>
+					</li>
+					<?php endif; ?>
 
 
 

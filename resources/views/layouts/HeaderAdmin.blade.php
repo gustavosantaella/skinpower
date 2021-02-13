@@ -122,12 +122,12 @@ rel="stylesheet">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">Pedidos:</h6>
 					<a class="collapse-item" href="{{ route('listar pedidos') }}">Pedidos pendientes</a>
-					<a class="collapse-item" href="Ventas/ventasVer">Ventas</a>
+					<a class="collapse-item" href="{{ route('listar ventas') }}">Ventas</a>
 					<div class="collapse-divider"></div>
 					<h6 class="collapse-header">Otras tablas:</h6>
-
-					<a class="collapse-item" href="User/list">Usuarios</a>
-					<a class="collapse-item" href=User/Clients>Clientes</a>
+					<a class="collapse-item" href="{{ route('listar admin') }}">Administradores</a>
+					<a class="collapse-item" href="{{ route('listar clientes') }}">Clientes</a>
+				{{-- 	<a class="collapse-item" href="{{ route('administradores') }}">Administradores</a> --}}
 				</div>
 			</div>
 		</li>
@@ -184,14 +184,7 @@ rel="stylesheet">
 
 		
 
-			<li class="nav-item dropdown no-arrow mx-1">
-				<a class="nav-link dropdown-toggle" href="{{  route('listar pedidos') }}" id="alertsDropdown" >
-					<i class="fas fa-bell"></i>
-					<!-- Counter - Alerts -->
-
-				</a>
-			</li>
-
+			
 
 
 			<!-- end nav items  -->

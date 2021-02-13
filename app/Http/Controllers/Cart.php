@@ -29,7 +29,7 @@ class Cart extends Controller
 				'idproduct'=>Crypt::decryptString($request->id),
 				'nameproduct'=>Crypt::decryptString($request->nameproduct),
 				'brand'=>Crypt::decryptString($request->brand),
-				'price'=>Crypt::decryptString($request->stock),
+				'price'=>Crypt::decryptString($request->price),
 				'stock client'=> $request->stockclient
 			];
 			

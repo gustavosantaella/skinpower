@@ -1,6 +1,7 @@
 @extends('layouts.HeaderAdmin')
 
 @section('content')
+
 @if (session('message'))
 	<div class="alert alert-info rounded-top rounded-right rounded-left rounded-bottom p-3">
 		{{session('message')}}
@@ -25,7 +26,7 @@
 				<td>{{$element->idorder}}</td>
 				<td>{{$element->name}}</td>
 				<td>{{$element->email}}</td>
-				<td>{{$element->email}}</td>
+				<td>{{$element->phone}}</td>
 				<td>{{date('d-m-Y H:i:s a',strtotime($element->creacion))}}</td>
 				<td>{{$element->pay}}</td>
 				<td>$./{{$element->total}}</td>
@@ -37,4 +38,5 @@
 	</tbody>
 </table>
 {{$list->links()}}
+</div>
 @endsection

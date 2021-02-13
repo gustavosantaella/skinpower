@@ -65,12 +65,19 @@ class Orders extends Controller
 		$datos['idUser'][]= Crypt::decryptString($request->idUser);
 		$datos['total'][] =number_format($total,2,',','.');
 		$datos['payMethod'][]= Crypt::decryptString($request->payMethod);
-	
 
-		if (!order\Orders::exists($datos) || !order\Orders::stockExist($datos))
+		$existe = order\Orders::stockExist($datos);
+		for ($i=0; $i <count($existe) ; $i++) { 
+			if (!$existe[$i]) {
+				return redirect()->back()->with('message','Revise que la cantidad este disponible');
+
+			}
+		}
+
+		if (!order\Orders::exists($datos)  )
 		{
-
-			return redirect()->back()->with('message','Por favor revise la existencia de los productos o la cantidad disponible.');
+			
+			return redirect()->back()->with('message','Por favor revise la existencia de los productos');
 		}
 
 		if (!DB::table('users')->where('id',$datos['idUser'])->select('*')->count() )
@@ -86,7 +93,15 @@ class Orders extends Controller
 		$datos['idorder'][]=$id = DB::getPdo()->lastInsertId();
 
 		$datos['idorder'][0];
-		if (!detail\detail_order::create($datos) ||!order\Orders::restarCantidad($datos))
+		
+		$resta =(order\Orders::restarCantidad($datos));
+		for ($i=0; $i <count($resta) ; $i++) { 
+			if (!$resta[$i]) {
+				return redirect()->back()->with('message','Error en la resta, no se pudo agregar el pedido');
+
+			}
+		}
+		if (!detail\detail_order::create($datos) )
 		{
 			return redirect()->back()->with('message','Ha ocurrido un error al agregar el pedido.');
 		}
@@ -141,10 +156,10 @@ class Orders extends Controller
 		{
 			redirect()->back()->with('message','Error al Sumar cantidad');
 		}
-		if (!detail\detail_order::where('idorder',$data['idorder'])->delete())
+	/*	if (!detail\detail_order::where('idorder',$data['idorder'])->delete())
 		{
 			redirect()->back()->with('message','Error al eliminar el pedido');
-		}
+		}*/
 		if (!order\orders::where('id',$data['idorder'])->delete())
 		{
 			redirect()->back()->with('message','Error al eliminar el pedido');
