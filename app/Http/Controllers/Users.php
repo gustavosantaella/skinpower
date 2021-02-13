@@ -47,7 +47,7 @@ class Users extends Controller
 			'lastname'=>strtoupper($request->lastname),
 			'email'=>strtoupper($request->email),
 			'rol'=>strtoupper('client'),
-			'created_at'=>date('d-m-Y H:i:s ',time()),
+			'created_at'=>$carbon->now(),
 			'pass'=>$pass,
 			'tokken'=>$tokken,
 			'verified'=>false,
