@@ -39,8 +39,8 @@ class Users extends Controller
 		
 		$pass =  Hash::make($request->pass);
 		$tokken  = Str::random(100);
-		$date = new DateTime();
-		$date->modify('+1 hour');
+		$carbon = new \Carbon\Carbon();
+		$f = $carbon->add('1 hour');
 		$array =
 		[
 			'name'=>strtoupper($request->name),
@@ -51,8 +51,11 @@ class Users extends Controller
 			'pass'=>$pass,
 			'tokken'=>$tokken,
 			'verified'=>false,
-			'email_verified_at'=>$date,
+			'email_verified_at'=>$f,
 		];
+
+		
+		
 		$array = (object) $array;
 		if (Usuarios\Users::Exists($array->email)):
 			return redirect()->back()->withInput()->with('message','El correo ya existe');
