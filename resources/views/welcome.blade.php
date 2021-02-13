@@ -173,9 +173,9 @@ background-size: cover; /* Resize the background image to cover the entire conta
 	</div>
 
 
-<div>
+{{-- <div>
 	<H1>Servicios</H1>
-</div>
+</div> --}}
 </div>
 
 

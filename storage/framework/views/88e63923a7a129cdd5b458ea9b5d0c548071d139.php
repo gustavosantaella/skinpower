@@ -107,7 +107,7 @@ rel="stylesheet">
 							<span class="badge badge-danger badge-counter"><?php echo (isset($_SESSION['carrito']))? count($_SESSION['carrito']):0; ?></span>
 						</a>
 					</li>
-					<?php if(!isset($_SESSION['phone']) && $_SESSION['phone'] ==''): ?>
+					<?php if(isset($_SESSION['phone']) && $_SESSION['phone'] ==''): ?>
 					<li class="nav-item dropdown no-arrow mx-1">
 						<a class="nav-link dropdown-toggle" href="<?php echo e(route('profile',[Crypt::encryptString($_SESSION['iduser'])])); ?>" id="alertsDropdown" >
 							<i class="fas fa-bell"></i>
@@ -159,7 +159,7 @@ rel="stylesheet">
 
 					<?php if (isset($_SESSION['name'])): ?>
 
-					<a class="dropdown-item "  href="<?php echo e(url('User/Profile')); ?>?id=<?php echo e(Crypt::encryptString($_SESSION['iduser'])); ?>" style="cursor: pointer;">
+					<a class="dropdown-item "  href="<?php echo e(route('profile',[Crypt::encryptString($_SESSION['iduser'])])); ?>" style="cursor: pointer;">
 						<i class="far fa-id-badge fa-sm fa-fw mr-2"></i>
 						Mi perfil
 					</a>

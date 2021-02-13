@@ -159,7 +159,7 @@ rel="stylesheet">
 
 					<?php if (isset($_SESSION['name'])): ?>
 
-					<a class="dropdown-item "  href="{{ url('User/Profile') }}?id={{Crypt::encryptString($_SESSION['iduser'])}}" style="cursor: pointer;">
+					<a class="dropdown-item "  href="{{   route('profile',[Crypt::encryptString($_SESSION['iduser'])])}}" style="cursor: pointer;">
 						<i class="far fa-id-badge fa-sm fa-fw mr-2"></i>
 						Mi perfil
 					</a>

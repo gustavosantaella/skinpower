@@ -51,7 +51,7 @@ class Users extends Controller
 			'pass'=>$pass,
 			'tokken'=>$tokken,
 			'verified'=>false,
-			'email_verified_at'=>$date->format('Y-m-d H:i:s'),
+			'email_verified_at'=>$date,
 		];
 		$array = (object) $array;
 		if (Usuarios\Users::Exists($array->email)):
@@ -170,7 +170,7 @@ class Users extends Controller
 					{
 						return redirect('/');
 					}
-					elseif($var->rol==='ADMIN')
+					elseif($var->rol==='ADMIN' || $var->rol==='SU')
 					{
 						return redirect('Admin/Home');
 					}
