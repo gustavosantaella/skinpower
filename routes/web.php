@@ -33,13 +33,14 @@ Route::group(['prefix'=>'User'],function(){
 	Route::post('Register','Users@Register')->middleware('specialchars');
 	Route::get ('Verify/email',"Users@updateVerified");
 	Route::get ('LogOut','Users@LogOut')->name('logout');
-	Route::get ('Profile','Users@Profile')->name('profile');
+	Route::get ('Profile/{id}','Users@Profile')->name('profile');
 	Route::post('Profile','Users@update')->middleware('specialchars');
 	Route::get ('resendTokken','Users@resendTokken');
 	Route::view('ForgotPassword','Users.forgotPassword')->name('forgot password');
 	Route::post('ForgotPassword','Users@resetPassword')->middleware('specialchars');
 	Route::get ('resetPass','Users@resetPass')->name('resetPass');
 	Route::post('resetPass','Users@resetclave')->middleware('specialchars');
+	Route::post('User/updateEmail','Users@updateEmail')->middleware('specialchars')->name('updateEmail');
 });
 
 

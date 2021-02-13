@@ -107,9 +107,9 @@ rel="stylesheet">
 							<span class="badge badge-danger badge-counter"><?php echo (isset($_SESSION['carrito']))? count($_SESSION['carrito']):0; ?></span>
 						</a>
 					</li>
-					@if (isset($_SESSION['phone']) && $_SESSION['phone'] =='')
+					@if (!isset($_SESSION['phone']) && $_SESSION['phone'] =='')
 					<li class="nav-item dropdown no-arrow mx-1">
-						<a class="nav-link dropdown-toggle" href="{{  route('listar pedidos') }}" id="alertsDropdown" >
+						<a class="nav-link dropdown-toggle" href="{{  route('profile',[Crypt::encryptString($_SESSION['iduser'])]) }}" id="alertsDropdown" >
 							<i class="fas fa-bell"></i>
 							<!-- Counter - Alerts -->
 							<span class="badge badge-danger badge-counter">*</span>
@@ -199,82 +199,35 @@ rel="stylesheet">
 	{{-- start foooter --}}
 
 	<footer class="mt-5 bg-white">
-		<div class=" w-100">
-			<div class="footer-body shadow-lg w-100 shadow-sm ">
 
-				<div class="contact  col mt-3 mb-3 pt-4 ml-5 d-flex">
-					<div class="col-md-5">
-						<div class="card bg-light">
-							<div class="card-header h3">Envianos un Email</div>
-							<div class="card-body ">
+		<div class="footer-body shadow-lg w-100 shadow-sm text-center ">
+
+			<div class="contact  col-md-12 mt-3 mb-3 pt-4 ml-xl-5 d-flex text-center ">
 
 
-								<form class="">
-									<fieldset class="form-group">
-										<label for="name">Primer nombre</label>
-										<input type="text" required="" class="form-control" name="name" id="name" placeholder="Your name...">
 
-									</fieldset>
-									<fieldset class="form-group">
-										<label for="lastName">Primer apellido</label>
-										<input type="text" required="" class="form-control" name="lastname" id="lastName" placeholder="Your last namet...">
-									</fieldset>
 
-									<fieldset class="form-group">
-										<label for="Email">Email</label>
-										<input type="email" required="" class="form-control" name="email" id="Email" placeholder="Your email...">
-									</fieldset>
-
-									<fieldset class="form-group">
-										<label for="affair">Asunto</label>
-										<input type="text" required="" class="form-control" name="email" id="affair" placeholder="Affair">
-									</fieldset>
-
-									<fieldset class="form-group">
-										<label for="message">Mensaje</label>
-										<textarea name="message" required="" class="form-control" placeholder="Message..."></textarea>
-									</fieldset>
-									<fieldset class="form-group">
-
-										<button class="btn btn-primary font-weight-bold" type="submit">Enviar</button>
-									</fieldset>
-								</form>
-							</div>
-						</div>
+				<div class="p-xl-3 text-center col-md-10">
+					<div class="social text-center">
+						<p class="font-weight-bold h5 mb-5">Contáctanos</p>
+					<a href="https://www.instagram.com/theskinpower/?hl=es-la" target="_blank"title="instagram">	<i class="fab fa-instagram fa-7x"></i></a>
+					<a href="https://linktr.ee/TheSkinPower" title="whatsapp" target="_blank">	<i class="fab fa-whatsapp text-success fa-7x ml-3"></i></a>
+					<a href="mailto:theskinpower.ca@gmail.com" title="email"target="_blank">	<i class="fas fa-envelope-open-text fa-7x ml-3"></i></a>
 					</div>
-
-
-					<div class="col-md-5">
-						<div class="p-xl-5">
-							<div class="social text-center">
-								<p class="font-weight-bold h5 mb-5">Contáctanos</p>
-								<i class="fab fa-instagram fa-7x"></i>
-								<i class="fab fa-whatsapp text-success fa-7x ml-3"></i>
-								<i class="fas fa-envelope-open-text fa-7x ml-3"></i>
-							</div>
-						</div>
-
-
-						<div class="img-fluid">
-							<img src="{{ asset('img/TheSkinPower1.jpg') }}" alt="The skin power" width="200" height="200" class="rounded-pill offset-md-5" >
-						</div>
-					</div>
-
-
-
-
 				</div>
 
-
-
-
-				<div class="copyright text-center my-auto">
-					<span>Copyright &copy; The Skin Power  {{ date('Y')}}, All rights reserved.</span>
-				</div>
 			</div>
 
 
+
+
+			<div class="copyright text-center my-auto">
+				<span>Copyright &copy; The Skin Power  {{ date('Y')}}, All rights reserved.</span>
+			</div>
 		</div>
+
+
+		
 	</footer>
 
 	<!-- End of Footer -->

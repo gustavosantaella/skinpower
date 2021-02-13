@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Mails;
 use DateTime;
 use Exception;
-
+use Arr;
 class Users extends Controller
 {
 	/**
@@ -206,7 +206,7 @@ class Users extends Controller
 		$date->modify('+1 hour');
 		$array = ['email_verified_at'=>$date->format('Y-m-d H:i:s'),'tokken'=>Str::random(100)];
 		DB::table('users')->where(['id'=>$id])->update($array);
-		$correo = new Mails('Verify your email',$id,$array);
+		$correo = new Mails('Verify your email',$id,(object)$array,'confirmMail');
 		if (Mail::to($user->email)->send($correo)===null) 
 		{
 			return redirect('User/SignIn')->with('message','Please, check your email and confirm your email, u have 1 hour');
@@ -232,11 +232,11 @@ class Users extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function Profile(Request $request)
+	public function Profile($id)
 	{
-		$this->validate($request,['id'=>'required']);
-
-		$id = Crypt::decryptString($request->id);
+	
+	
+		$id = Crypt::decryptString($id);
 		if(!isset($_SESSION['iduser'])):redirect('/'); endif;
 		$user = DB::table('users')->select('*')->find($id);
 
@@ -254,11 +254,10 @@ class Users extends Controller
 	{
 		$this->validate($request,[
 			'iduser'=>'required|Min:20',
-			'email'=>'required|Min:10|email',
 			'name'=>'required|Min:5',
 			'lastname'=>'required|Min:5',
 			'_token'=>'required|Min:5',
-			'phone'=>'required|Min:13|Max:13',
+			
 
 		]);
 		$id =Crypt::decryptString($request->iduser);
@@ -272,6 +271,42 @@ class Users extends Controller
 		else
 		{
 			return redirect()->back()->with('message','error');
+		}
+	}
+
+	public function updateEmail(Request $request)
+	{
+
+		$all = $request->all();
+		$newArr = Arr::set($all,'email',strtoupper($request->email));
+		$newRequest = (new Request($newArr) );
+		$this::validate($newRequest,[
+			'email'=>'required|Min:5|email|unique:users,email',
+			'_token'=>'required|Min:5',
+			'iduser'=>'required|Min:5',
+		]);
+
+
+
+		$id = Crypt::decryptString($request->iduser);
+		$correo = new Mails('Verify your email',$id,$newRequest,'confirmMail');
+		if (Mail::to($newRequest->email)->send($correo)===null) 
+		{
+		
+			$user =usuarios\Users::find($id);
+
+			$user->verified = false;
+			$user->email  = $newRequest->email;
+			$user->tokken = Str::random(100);
+			$_SESSION['email']=$request->email;
+			$user->save();
+			unset($_SESSION);
+/*				return redirect()->route('signin')->with('message','Por favor confirma tu correo');
+*/				return redirect()->back()->with('message','Por favor confirma tu correo');
+		}
+		else
+		{
+			return redirect()->back()->with('message','Error');
 		}
 	}
 
@@ -306,7 +341,7 @@ class Users extends Controller
 			->join('orders','orders.iduser','=','users.id')
 			->where('users.id',$id)
 			->delete();
-	
+
 			return redirect()->back()->with('message','Eliminado exitosamente');
 		}
 	}
