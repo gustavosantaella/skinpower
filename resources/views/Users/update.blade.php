@@ -32,7 +32,7 @@
 
 	<fieldset class="form-group">
 		<label for="phone">Your phone</label>
-		<input type="tel" class="form-control @if ($_SESSION['phone'] =='')
+		<input type="tel" class="form-control @if (isset($_SESSION['phone']) && $_SESSION['phone'] =='')
 			border-danger
 		@endif" id="phone"required=""  minlength="13" min="13" max="13" maxlength="13" name="phone"value="{{$user->phone}}" placeholder="Phone...">
 	</fieldset>
