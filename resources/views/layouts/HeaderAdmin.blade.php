@@ -56,9 +56,9 @@ rel="stylesheet">
 
 <body id="page-top">
 	<!-- Page Wrapper -->
-{{-- START SIDEBAR ADMIN --}}
+	{{-- START SIDEBAR ADMIN --}}
 	<div id="wrapper">
-	<!-- Sidebar -->
+		<!-- Sidebar -->
 
 		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" style="background: pink!important" id="accordionSidebar">
 
@@ -127,7 +127,7 @@ rel="stylesheet">
 					<h6 class="collapse-header">Otras tablas:</h6>
 					<a class="collapse-item" href="{{ route('listar admin') }}">Administradores</a>
 					<a class="collapse-item" href="{{ route('listar clientes') }}">Clientes</a>
-				{{-- 	<a class="collapse-item" href="{{ route('administradores') }}">Administradores</a> --}}
+					{{-- 	<a class="collapse-item" href="{{ route('administradores') }}">Administradores</a> --}}
 				</div>
 			</div>
 		</li>
@@ -149,92 +149,92 @@ rel="stylesheet">
 
 
 
-{{-- FIN SIDEBAR ADMIN --}}
+	{{-- FIN SIDEBAR ADMIN --}}
 
-<div id="content-wrapper" class="d-flex flex-column">
+	<div id="content-wrapper" class="d-flex flex-column">
 
-	<!-- Main Content -->
-	<div id="content">
+		<!-- Main Content -->
+		<div id="content">
 
-		<!-- Topbar -->
-		<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow w-100" >
+			<!-- Topbar -->
+			<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow w-100" >
 
-			<!-- Sidebar Toggle (Topbar) -->
+				<!-- Sidebar Toggle (Topbar) -->
 
 
-			<!-- Topbar Search -->
-			<form
-			class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-			<div class="input-group">
-			{{-- 	<h3>The Skin Power</h3> --}}
+				<!-- Topbar Search -->
+				<form
+				class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+				<div class="input-group">
+					{{-- 	<h3>The Skin Power</h3> --}}
+
+				</div>
+			</form>
+
+			<!-- Topbar Navbar -->
+			<ul class="navbar-nav ml-auto">
+
+				<!-- Nav Item - Search Dropdown (Visible Only XS) -->
+
+				<div id="icon-user"></div>
+				<!-- Nav Item - Alerts -->
+
+
+				<!-- Nav items -->
+
+				
+
+				
+
+
+				<!-- end nav items  -->
+				<div class="topbar-divider d-none d-sm-block"></div>
+
+				<!-- Nav Item - User Information -->
+				<li class="nav-item dropdown no-arrow">
+					<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="mr-2 d-none d-lg-inline text-gray-600 small">
+						<?php if (isset($_SESSION['name'])):?>
+						<?php echo $_SESSION['name'] ?>
+
+						<?php else: ?>
+						Guest
+						<?php endif ?>
+
+					</span>
+					<img class="img-profile rounded-circle"
+					src="{{ asset('img/undraw_profile.svg') }}">
+				</a>
+				<!-- Dropdown - User Information -->
+				<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+				aria-labelledby="userDropdown">
+
+				<div class="dropdown-divider"></div>
+				<!-- href="user/Login" -->
+
+				<?php if (isset($_SESSION['name'])): ?>
+
+				<a class="dropdown-item "  href="{{   route('profile',[Crypt::encryptString($_SESSION['iduser'])])}}" style="cursor: pointer;">
+					<i class="far fa-id-badge fa-sm fa-fw mr-2"></i>
+					Mi perfil
+				</a>
+
+				<a class="dropdown-item "  href="{{ route('HomePage') }}" style="cursor: pointer;">
+					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+					Ver página
+				</a>
+				<a class="dropdown-item "  href="{{ url('User/LogOut') }}" style="cursor: pointer;">
+					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+					Cerrar sesión
+				</a>
+				<?php endif ?>
+
 
 			</div>
-		</form>
+		</li>
 
-		<!-- Topbar Navbar -->
-		<ul class="navbar-nav ml-auto">
-
-			<!-- Nav Item - Search Dropdown (Visible Only XS) -->
-
-			<div id="icon-user"></div>
-			<!-- Nav Item - Alerts -->
-
-
-			<!-- Nav items -->
-
-		
-
-			
-
-
-			<!-- end nav items  -->
-			<div class="topbar-divider d-none d-sm-block"></div>
-
-			<!-- Nav Item - User Information -->
-			<li class="nav-item dropdown no-arrow">
-				<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span class="mr-2 d-none d-lg-inline text-gray-600 small">
-					<?php if (isset($_SESSION['name'])):?>
-					<?php echo $_SESSION['name'] ?>
-
-					<?php else: ?>
-					Guest
-					<?php endif ?>
-
-				</span>
-				<img class="img-profile rounded-circle"
-				src="{{ asset('img/undraw_profile.svg') }}">
-			</a>
-			<!-- Dropdown - User Information -->
-			<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-			aria-labelledby="userDropdown">
-
-			<div class="dropdown-divider"></div>
-			<!-- href="user/Login" -->
-
-			<?php if (isset($_SESSION['name'])): ?>
-
-			<a class="dropdown-item "  href="{{ url('User/Profile') }}?id={{Crypt::encryptString($_SESSION['iduser'])}}" style="cursor: pointer;">
-				<i class="far fa-id-badge fa-sm fa-fw mr-2"></i>
-				Mi perfil
-			</a>
-
-			<a class="dropdown-item "  href="{{ route('HomePage') }}" style="cursor: pointer;">
-				<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-				Ver página
-			</a>
-			<a class="dropdown-item "  href="{{ url('User/LogOut') }}" style="cursor: pointer;">
-				<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-				Cerrar sesión
-			</a>
-			<?php endif ?>
-
-
-		</div>
-	</li>
-
-</ul>
+	</ul>
 
 </nav>
 
