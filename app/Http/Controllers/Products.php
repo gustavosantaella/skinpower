@@ -86,7 +86,7 @@ class Products extends Controller
 		if ($deleteOrder > 0) {
 			return redirect()->back()->with('message','No se puede eliminar, verifique que no haya pedidos asociado a este producto, si desea eliminar este producto, elimine los pedidos asociados a este.');
 		}
-		$img = productos\products::where('idproduct',$idpro)->first();
+		$img = productos\Products::where('idproduct',$idpro)->first();
 		Storage::delete($img->photo); 
 		if (!$delete->delete()) {
 			return redirect()->back()->with('message','Error al eliminar');
@@ -103,7 +103,7 @@ class Products extends Controller
 		}
 
 		$idpro = Crypt::decryptString($id);
-		$producto = productos\products::where('idproduct',$idpro)->first();
+		$producto = productos\Products::where('idproduct',$idpro)->first();
 
 		return view('Admin.products.edit',compact('producto'));
 	}
