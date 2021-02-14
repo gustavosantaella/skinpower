@@ -1,5 +1,5 @@
 <?php $__env->startSection('content'); ?>
-<div class="bg-danger" class="img"
+<div class="" class="img"
 style="background-image: url('<?php echo e(asset('img/banner.jpg')); ?>');    
 height: 200px; /* You must set a specified height */
 background-position: center; /* Center the image */

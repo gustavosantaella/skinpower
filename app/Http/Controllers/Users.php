@@ -49,6 +49,7 @@ class Users extends Controller
 			'rol'=>strtoupper('client'),
 			'created_at'=>$carbon->now(),
 			'pass'=>$pass,
+			'phone'=>'',
 			'tokken'=>$tokken,
 			'verified'=>false,
 			'email_verified_at'=>$f,
@@ -69,7 +70,7 @@ class Users extends Controller
 
 				if (Mail::to($array->email)->send($correo)===null) 
 				{
-					return redirect()->back()->with('message','Please, check your email and confirm your email, u have 1 hour');
+					return redirect()->back()->with('message','Por favor revise su correo, Limite de tiempo : 1 hora');
 				}
 				else
 				{
@@ -110,7 +111,7 @@ class Users extends Controller
 				{
 					$removeTokken = DB::update('UPDATE users SET tokken=null, email_verified_at=null WHERE id=:id',[':id'=>$id]);
 
-					return redirect('User/SignIn')->with('message','Email verified, SignIn.');
+					return redirect('User/SignIn')->with('message','Email verificado');
 
 				}
 				else
@@ -154,7 +155,7 @@ class Users extends Controller
 			$var = (Usuarios\Users::Exist((strtoupper($request->email))));
 			if ($var->verified ===false) {
 				
-				return redirect()->back()->withInput()->with('message','Email not verified, check your email and confirm.');
+				return redirect()->back()->withInput()->with('message','Email no verificado, revise su bandeja de mensajes.');
 				
 			}
 
@@ -184,18 +185,18 @@ class Users extends Controller
 				}
 				else
 				{
-					return redirect()->back()->withInput()->with('message','Invalid password');
+					return redirect()->back()->withInput()->with('message','Clave invalida');
 				}
 			}
 			else
 			{
-				return redirect()->back()->withInput()->with('message','Invalid user');
+				return redirect()->back()->withInput()->with('message','Usuario invalido');
 			}
 
 		}
 		else
 		{
-			return redirect()->back()->withInput()->with('message','Invalid user');
+			return redirect()->back()->withInput()->with('message','Usuario invalido');
 		}
 
 	}
@@ -212,7 +213,7 @@ class Users extends Controller
 		$correo = new Mails('Verify your email',$id,(object)$array,'confirmMail');
 		if (Mail::to($user->email)->send($correo)===null) 
 		{
-			return redirect('User/SignIn')->with('message','Please, check your email and confirm your email, u have 1 hour');
+			return redirect('User/SignIn')->with('message','Por favor revise su correo, Limite de tiempo : 1 hora');
 		}
 		else
 		{
@@ -269,7 +270,7 @@ class Users extends Controller
 			$_SESSION['lastname']=strtoupper($request->lastname);
 			$_SESSION['email']=strtoupper($request->email);
 			$_SESSION['phone']=$request->phone;
-			return redirect()->back()->with('message','Changed succefully');
+			return redirect()->back()->with('message','Actualizado exitosamente');
 		}
 		else
 		{
@@ -355,7 +356,7 @@ class Users extends Controller
 		$request->email = strtoupper($request->email);
 		$data =DB::table('users')->where('email','=',$request->email)->select('*')->first();
 		if(!$data):
-			return redirect()->back()->withInput()->with('message','Invalid email');
+			return redirect()->back()->withInput()->with('message','Correo invalido');
 		endif;
 		
 		$data->tokken = Str::random(100);
@@ -368,7 +369,7 @@ class Users extends Controller
 		$date = new DateTime();
 		$date->modify('+1 hour');
 		DB::table('users')->where('id',$data->id)->update(['email_verified_at'=>$date->format('Y-m-d H:i:s'),'tokken'=>$data->tokken]);
-		return redirect()->back()->with('message','Please check your email');
+		return redirect()->back()->with('message','Por favor revise su email');
 
 	}
 
@@ -384,7 +385,7 @@ class Users extends Controller
 		}
 		if (!DB::table('users')->where('tokken',$tokken)->where('email_verified_at','>',now())->select('*')->find($id))
 		{
-			return redirect('User/ForgotPassword')->with('message','Invalid tokken');
+			return redirect('User/ForgotPassword')->with('message','tokken invalido');
 		}
 		return view('Users/resetPasswordForm')->with('id',$id);
 	}
@@ -412,7 +413,7 @@ class Users extends Controller
 			return redirect()->back()->with('message','Ups, error');
 		}
 
-		return redirect('User/SignIn')->with('message','Password changed succefully');
+		return redirect('User/SignIn')->with('message','Clave actualizada exitosamente');
 	}
 
 	public function adminsList()

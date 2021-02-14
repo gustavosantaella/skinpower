@@ -107,7 +107,21 @@ rel="stylesheet">
 							<span class="badge badge-danger badge-counter"><?php echo (isset($_SESSION['carrito']))? count($_SESSION['carrito']):0; ?></span>
 						</a>
 					</li>
-					<?php if(isset($_SESSION['phone']) && $_SESSION['phone'] ==''): ?>
+					<?php
+					
+					?>
+					<?php if(isset($_SESSION['name'])): ?>
+
+					<li class="nav-item dropdown no-arrow mx-1">
+						<a class="nav-link dropdown-toggle" href="sdfsdf" id="alertsDropdown" >
+							<i class="font-weight-bold">pedidos</i>
+							<!-- Counter - Alerts -->
+							<span class="badge badge-danger badge-counter"><?php echo e(DB::table('orders')->where('iduser',$_SESSION['iduser'])->count()); ?></span>
+
+						</a>
+					</li>
+
+					<?php if( $_SESSION['phone'] ==''): ?>
 					<li class="nav-item dropdown no-arrow mx-1">
 						<a class="nav-link dropdown-toggle" href="<?php echo e(route('profile',[Crypt::encryptString($_SESSION['iduser'])])); ?>" id="alertsDropdown" >
 							<i class="fas fa-bell"></i>
@@ -116,6 +130,8 @@ rel="stylesheet">
 
 						</a>
 					</li>
+					<?php endif; ?>
+					
 					<?php endif; ?>
 
 
@@ -210,9 +226,9 @@ rel="stylesheet">
 				<div class="p-xl-3 text-center col-md-10">
 					<div class="social text-center">
 						<p class="font-weight-bold h5 mb-5">Contáctanos</p>
-					<a href="https://www.instagram.com/theskinpower/?hl=es-la" target="_blank"title="instagram">	<i class="fab fa-instagram fa-7x"></i></a>
-					<a href="https://linktr.ee/TheSkinPower" title="whatsapp" target="_blank">	<i class="fab fa-whatsapp text-success fa-7x ml-3"></i></a>
-					<a href="mailto:theskinpower.ca@gmail.com" title="email"target="_blank">	<i class="fas fa-envelope-open-text fa-7x ml-3"></i></a>
+						<a href="https://www.instagram.com/theskinpower/?hl=es-la" class="text-dark" target="_blank"title="instagram">	<i class="fab fa-instagram fa-7x"></i></a>
+						<a href="https://linktr.ee/TheSkinPower" title="whatsapp" target="_blank">	<i class="fab fa-whatsapp text-success fa-7x ml-3"></i></a>
+						<a href="mailto:theskinpower.ca@gmail.com" title="email"target="_blank">	<i class="fas fa-envelope-open-text fa-7x ml-3"></i></a>
 					</div>
 				</div>
 

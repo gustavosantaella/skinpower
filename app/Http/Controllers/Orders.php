@@ -107,7 +107,9 @@ class Orders extends Controller
 		}
 
 		unset($_SESSION['carrito']);
-		return redirect()->back()->with('message','Nos comunicaremos con usted via email o por mensaje a su número de teléfono.');
+		return redirect()->back()->with('message',"
+			Nos comunicaremos con usted via email o por mensaje a su número de teléfono			
+			");
 		
 	}
 
