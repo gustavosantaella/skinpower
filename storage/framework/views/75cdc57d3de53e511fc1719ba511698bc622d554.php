@@ -39,7 +39,7 @@ background-size: cover; /* Resize the background image to cover the entire conta
 					<div class="card-img img-fluid img mx-auto mb-2 ">
 						<img src="<?php echo e(asset('img/TheSkinPower4.jpg')); ?>" width="250" height="150" alt="">	
 					</div>
-					<h4 class="card-title">Tu tipo de piel</h4>
+					<h4 class="card-title">Rutina seg&uacute;n tu tipo de piel</h4>
 					<p class="card-text text-justify">
 						Todos los tipos de pieles deben realizar diferentes rutinas adecuadas a sus necesidades, así que huye de los que te recomienden la misma rutina que ellos usan porque les funcionó.  <br>
 
