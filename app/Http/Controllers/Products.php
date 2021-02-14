@@ -81,7 +81,7 @@ class Products extends Controller
 			abort(500);
 		}
 		$idpro = Crypt::decryptString($idproduct);
-		$delete = productos\products::where('idproduct',$idpro);
+		$delete = productos\Products::where('idproduct',$idpro);
 		$deleteOrder = productos\detail_order::where('idproduct',$idpro)->count();
 		if ($deleteOrder > 0) {
 			return redirect()->back()->with('message','No se puede eliminar, verifique que no haya pedidos asociado a este producto, si desea eliminar este producto, elimine los pedidos asociados a este.');
