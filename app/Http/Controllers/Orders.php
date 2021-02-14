@@ -179,6 +179,6 @@ class Orders extends Controller
 		->select('orders.id as idorder','orders.created_at as creacion','orders.total as total','orders.pay as pay','users.*')
 		->paginate(5);
 
-		return view('Page.ordersList',compact('list'));
+		return view('ordersList',compact('list'));
 	}
 }
