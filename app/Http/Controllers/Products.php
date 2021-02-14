@@ -134,9 +134,7 @@ class Products extends Controller
 
 		];
 
-		/*if (DB::table('products')->where('nameproduct',$request->nombre)->count()) {
-			return redirect()->back()->withInput()->with('message','El nombre del producto ya existe');
-		}*/
+		
 		if (!productos\Products::edit($array,Crypt::decryptString($request->idproduct))) {
 		abort(500);
 		
