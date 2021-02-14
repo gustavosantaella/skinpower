@@ -78,7 +78,10 @@ rel="stylesheet">
 					<form
 					class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 					<div class="input-group">
-						<h3>The Skin Power</h3>
+			{{-- 			<h3>The Skin Power</h3> --}}
+<div class="img-fluid">
+	<a href="{{ route('HomePage') }}" title=""><img src="{{ asset('img/TheSkinPower1.jpg') }}" width="50" height="50" class=" rounded-circle" alt=""></a>
+</div> <br>
 
 					</div>
 				</form>
@@ -113,7 +116,7 @@ rel="stylesheet">
 					@if (isset($_SESSION['name']))
 
 					<li class="nav-item dropdown no-arrow mx-1">
-						<a class="nav-link dropdown-toggle" href="sdfsdf" id="alertsDropdown" >
+						<a class="nav-link dropdown-toggle" href="{{ route('list orders user',[Crypt::encryptString($_SESSION['iduser'])]) }}" id="alertsDropdown" >
 							<i class="font-weight-bold">pedidos</i>
 							<!-- Counter - Alerts -->
 							<span class="badge badge-danger badge-counter">{{DB::table('orders')->where('iduser',$_SESSION['iduser'])->count()}}</span>
@@ -228,7 +231,7 @@ rel="stylesheet">
 						<p class="font-weight-bold h5 mb-5">Contáctanos</p>
 						<a href="https://www.instagram.com/theskinpower/?hl=es-la" class="text-dark" target="_blank"title="instagram">	<i class="fab fa-instagram fa-7x"></i></a>
 						<a href="https://linktr.ee/TheSkinPower" title="whatsapp" target="_blank">	<i class="fab fa-whatsapp text-success fa-7x ml-3"></i></a>
-						<a href="mailto:theskinpower.ca@gmail.com" title="email"target="_blank">	<i class="fas fa-envelope-open-text fa-7x ml-3"></i></a>
+						<a href="mailto:theskinpower.ca@gmail.com" title="theskinpower.ca@gmail.com"target="_blank">	<i class="fas fa-envelope-open-text fa-7x ml-3"></i></a>
 					</div>
 				</div>
 
@@ -253,6 +256,7 @@ rel="stylesheet">
 
 </div>
 <!-- End of Page Wrapper -->
+
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">

@@ -22,6 +22,8 @@ Route::group(['prefix'=>'Page'],function()
 {
 	Route::get('Store','Products@index')->name('Ver productos');
 	Route::post('Store','Cart@addToCart')->name('Agg produsctos al carrito');
+	Route::get('Orders/list/{id}','Orders@listOrdersUser')->name('list orders user');
+	Route::get('Pedidos/ver/{id}/{iduser}','detail_order@view')->name('ver pedido user');
 });
 
 /*Users*/

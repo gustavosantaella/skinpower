@@ -17,7 +17,7 @@ class detail_order extends Controller
 		{
 			abort(500);
 		}
-		$id = Crypt::decryptString($id);
+		$id =(integer) Crypt::decryptString($id);
 		$detail = detail\detail_order::join('products','products.idproduct','=','detail_orders.idproduct')->where('idorder',$id)->select('products.nameproduct','products.brand','products.idproduct','detail_orders.*')->get();
 		$user = order\Orders::join('users','users.id','orders.iduser',)->find(($id));
 
@@ -27,4 +27,6 @@ class detail_order extends Controller
 		}
 		return view('Admin.orders.view',compact('detail','user','id'));
 	}
+
+	
 }
