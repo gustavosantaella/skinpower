@@ -1,6 +1,5 @@
 var typed = new Typed('.typed', {
 	strings: [
-	"Para tu piel.",
 	"Para tener una piel saludable.",
 	"Para sentirse bien.",
 	"Para ser feliz!!."],

@@ -78,10 +78,10 @@ rel="stylesheet">
 					<form
 					class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 					<div class="input-group">
-			
-<div class="img-fluid">
-	<a href="<?php echo e(route('HomePage')); ?>" title=""><img src="<?php echo e(asset('img/TheSkinPower1.jpg')); ?>" width="50" height="50" class=" rounded-circle" alt=""></a>
-</div> <br>
+						
+						<div class="img-fluid">
+							<a href="<?php echo e(route('HomePage')); ?>" title=""><img src="<?php echo e(asset('img/TheSkinPower1.jpg')); ?>" width="50" height="50" class=" rounded-circle" alt=""></a>
+						</div> <br>
 
 					</div>
 				</form>
@@ -200,7 +200,10 @@ rel="stylesheet">
 						Iniciar sesión
 					</a>
 					<?php endif ?>
-
+					<a class="dropdown-item " target="_blank" href="https://api.whatsapp.com/send?phone=584127328212&text=Hola,%20estoy interesado en un proyecto web." style="cursor: pointer;">
+						<i class="fab fa-whatsapp t-alt fa-sm fa-fw mr-2 text-success"></i>
+						Contactar al programador
+					</a>
 
 				</div>
 			</li>

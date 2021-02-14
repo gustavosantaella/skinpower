@@ -171,14 +171,14 @@ class Orders extends Controller
 		
 	}
 
-	public function listOrdersUser($id)
-	{
-		$id = Crypt::decryptString($id);
-		$list = order\Orders::where('iduser',$id)
-		->join('users','users.id','=','orders.iduser')
-		->select('orders.id as idorder','orders.created_at as creacion','orders.total as total','orders.pay as pay','users.*')
-		->paginate(5);
+		public function listOrdersUser($id)
+		{
+			$id = Crypt::decryptString($id);
+			$list = order\Orders::where('iduser',$id)
+			->join('users','users.id','=','orders.iduser')
+			->select('orders.id as idorder','orders.created_at as creacion','orders.total as total','orders.pay as pay','users.*')
+			->paginate(5);
 
-		return view('page/ordersList',compact('list'));
+			return view('page/ordersList',compact('list'));
+		}
 	}
-}

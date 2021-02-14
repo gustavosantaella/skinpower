@@ -238,8 +238,8 @@ class Users extends Controller
 	 */
 	public function Profile($id)
 	{
-	
-	
+
+
 		$id = Crypt::decryptString($id);
 		if(!isset($_SESSION['iduser'])):redirect('/'); endif;
 		$user = DB::table('users')->select('*')->find($id);
@@ -260,15 +260,26 @@ class Users extends Controller
 			'iduser'=>'required|Min:20',
 			'name'=>'required|Min:5',
 			'lastname'=>'required|Min:5',
+			'phone'=>'required|Min:13|Max:13',
 			'_token'=>'required|Min:5',
 			
 
 		]);
+
+		
+		
+
+		 $codigo= substr($request->phone,0,6);
+
+		if ($codigo !=='+58416' && $codigo !=='+58424'&& $codigo !=='+58412'&& $codigo !=='+58426'&& $codigo !=='+58212'&& $codigo !=='+58414') {
+			return redirect()->back()->with('message','EL CODIGO DE AREA DEBE SER +58');
+		}
+
+
 		$id =Crypt::decryptString($request->iduser);
 		if (usuarios\Users::updateUser($request,$id)) {
 			$_SESSION['name']=strtoupper($request->name);
 			$_SESSION['lastname']=strtoupper($request->lastname);
-			$_SESSION['email']=strtoupper($request->email);
 			$_SESSION['phone']=$request->phone;
 			return redirect()->back()->with('message','Actualizado exitosamente');
 		}
@@ -296,7 +307,7 @@ class Users extends Controller
 		$correo = new Mails('Verify your email',$id,$newRequest,'confirmMail');
 		if (Mail::to($newRequest->email)->send($correo)===null) 
 		{
-		
+
 			$user =usuarios\Users::find($id);
 
 			$user->verified = false;
@@ -307,12 +318,12 @@ class Users extends Controller
 			unset($_SESSION);
 /*				return redirect()->route('signin')->with('message','Por favor confirma tu correo');
 */				return redirect()->back()->with('message','Por favor confirma tu correo');
-		}
-		else
-		{
-			return redirect()->back()->with('message','Error');
-		}
-	}
+}
+else
+{
+	return redirect()->back()->with('message','Error');
+}
+}
 
 	/**
 	 * Remove the specified resource from storage.
