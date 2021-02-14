@@ -45,7 +45,7 @@ class Products extends Controller
 
 
 			]);
-
+ 
 
 		$array = [
 			'brand'=>$request->marca,
