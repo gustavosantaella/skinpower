@@ -63,7 +63,7 @@ class Users extends Controller
 		else:
 			if (Usuarios\Users::Register($array)):
 
-				$id = DB::getPdo()->lastInsertId();
+				$id =  DB::getPdo()->lastInsertId();
 				
 				$correo = new Mails('Verify your email',$id,$array,'confirmMail');
 

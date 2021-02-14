@@ -26,7 +26,7 @@
 		<?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $element): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<tr>
 				<td><?php echo e($element->idproduct); ?></td>
-				<td><img src="<?php echo e(asset('storage/'.str_replace('public/',null,$element->photo))); ?>" width="50" height="50" alt="">	</td>
+				<td><img src="<?php echo e(asset("img/DINAMIC/$element->photo")); ?>" width="100" height="100" alt="">	</td>
 				<td><?php echo e($element->brand); ?></td>
 				<td><?php echo e($element->nameproduct); ?></td>
 				<td><?php echo e($element->price); ?></td>

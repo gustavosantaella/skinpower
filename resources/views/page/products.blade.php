@@ -39,7 +39,7 @@
 						<div class="card-body">
 							<div class="card-img img-fluid img mx-auto mb-2 ">
 							
-								<img src="{{ asset('storage/'.str_replace('public/',null,$element->photo)) }}" width="150" height="230" alt="">	
+								<img src="{{ asset("img/DINAMIC/$element->photo") }}" width="150" height="230" alt="">	
 							</div>
 							<h4 class="card-title">{{$element->nameproduct}}</h4>
 							<p class="card-text">Stock: {{$element->stock}}</p>

@@ -25,7 +25,7 @@
 		@foreach ($products as $element)
 			<tr>
 				<td>{{$element->idproduct}}</td>
-				<td><img src="{{ asset('storage/'.str_replace('public/',null,$element->photo)) }}" width="50" height="50" alt="">	</td>
+				<td><img src="{{ asset("img/DINAMIC/$element->photo") }}" width="100" height="100" alt="">	</td>
 				<td>{{$element->brand}}</td>
 				<td>{{$element->nameproduct}}</td>
 				<td>{{$element->price}}</td>

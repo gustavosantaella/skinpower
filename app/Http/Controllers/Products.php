@@ -10,6 +10,7 @@ use Stevebauman\Purify\Facades\Purify;
 use DB;
 use Crypt;
 use Storage;
+use File;
 class Products extends Controller
 {
 	/**
@@ -46,17 +47,21 @@ class Products extends Controller
 
 			]);
 
-
+		$image = $request->file('foto');
+		$photo = strtolower(str_replace(' ',null, $image->getClientOriginalName()));
 		$array = [
 			'brand'=>$request->marca,
 			'nameproduct'=>$request->nombre,
 			'price'=>$request->precio,
 			'stock'=>$request->cantidad,
 			'status'=>$request->status,
-			'photo'=>$request->file('foto')->store('public/img'),
+			'photo'=>$photo,
 			'created_at'=>now(),
 
 		];
+		$path =  public_path().'/img/DINAMIC';
+		
+$image->move($path,$photo);
 
 		if (DB::table('products')->where('nameproduct',$request->nombre)->count()) {
 			return redirect()->back()->withInput()->with('message','El nombre del producto ya existe');
@@ -64,7 +69,6 @@ class Products extends Controller
 		if (!productos\Products::i($array)) {
 			return redirect()->route('add product');
 		}
-
 		return redirect()->route('add product')->with('message','Agregado exitosamente');
 	}
 
@@ -87,7 +91,7 @@ class Products extends Controller
 			return redirect()->back()->with('message','No se puede eliminar, verifique que no haya pedidos asociado a este producto, si desea eliminar este producto, elimine los pedidos asociados a este.');
 		}
 		$img = productos\Products::where('idproduct',$idpro)->first();
-		Storage::delete($img->photo); 
+		File::delete(public_path().'/img/DINAMIC/'.$img->photo);
 		if (!$delete->delete()) {
 			return redirect()->back()->with('message','Error al eliminar');
 
@@ -136,8 +140,8 @@ class Products extends Controller
 
 		
 		if (!productos\Products::edit($array,Crypt::decryptString($request->idproduct))) {
-		abort(500);
-		
+			abort(500);
+
 		}
 
 		return redirect()->route('listar productos')->with('message','Actualizado correctamente');
