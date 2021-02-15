@@ -108,7 +108,7 @@ class Sales extends Controller
 	public function destroy(Request $request)
 	{
 		$request->idsale = Crypt::decryptString($request->idsale);
-		$removeSale = sale\sale::find($request->idsale);
+		$removeSale = sale\Sale::find($request->idsale);
 		if (!$removeSale->delete()) {
 			return redirect()->route('listar ventas')->with('message','Error');
 		}
