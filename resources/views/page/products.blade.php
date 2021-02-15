@@ -41,7 +41,7 @@
 							
 								<img src="{{ asset("img/DINAMIC/$element->photo") }}" width="150" height="230" alt="">	
 							</div>
-							<h4 class="card-title">{{$element->nameproduct}}</h4>
+							<h4 class="card-title">{{strtoupper($element->nameproduct)}}</h4>
 							<p class="card-text">Stock: {{$element->stock}}</p>
 							<p class="card-text">$./ {{$element->price}}</p>
 							<select name="stockclient" class="form-control">
